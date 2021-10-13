@@ -11,6 +11,8 @@ stages:
 deploy:
   stage: deploy
   image: node:14-alpine
+  services:
+    - docker:dind
   before_script:
     - npm i -g firebase-tools
   script:
