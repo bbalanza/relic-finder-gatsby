@@ -11,8 +11,6 @@ stages:
 deploy:
   stage: deploy
   image: node:14
-  services:
-    - docker:dind
   before_script:
     - npm i -g firebase-tools
   script:
