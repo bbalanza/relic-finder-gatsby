@@ -1,16 +1,16 @@
 image: docker:latest
 
-include:
-  - template: Secret-Detection.gitlab-ci.yml
-  - template: Security/SAST.gitlab-ci.yml
+# include:
+#   - template: Secret-Detection.gitlab-ci.yml
+#   - template: Security/SAST.gitlab-ci.yml
 
 stages:
-  - test
+  # - test
   - deploy
 
 deploy:
   stage: deploy
-  image: node14-alpine
+  image: node:14-alpine
   before_script:
     - npm i -g firebase-tools
   script:
