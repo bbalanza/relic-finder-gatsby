@@ -20,11 +20,16 @@ deploy-staging:
   before_script:
     - npm i -g firebase-tools
   environment:
-    name: staging
+    name: $_ENV
   script:
-    - echo "Deploying to Firebase"
+    - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
     - npm install
     - npm run build
     - firebase hosting:channel:deploy $CI_ENVIRONMENT_NAME --token $FIREBASE_TOKEN
   rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      variables:
+        _ENV: production
     - if: $CI_COMMIT_BRANCH == "staging"
+      variables:
+        _ENV: staging
