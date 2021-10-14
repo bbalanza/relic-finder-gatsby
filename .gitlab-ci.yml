@@ -23,4 +23,9 @@ deploy:
     - echo "Deploying to Firebase"
     - npm install
     - npm run build
-    - firebase deploy --token $FIREBASE_TOKEN
+  rules:
+    - if: $CI_COMMIT_BRANCH === $CI_DEFAULT_BRANCH
+      variables:
+        _ENV: staging
+      script:
+        - NODE_ENV=$_ENV node firebase hosting:channel:deploy $_ENV --token $FIREBASE_TOKEN
