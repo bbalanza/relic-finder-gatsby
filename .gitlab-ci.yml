@@ -14,18 +14,17 @@ stages:
   # - test
   - deploy
 
-deploy:
+deploy-staging:
   stage: deploy
   image: node:14
   before_script:
     - npm i -g firebase-tools
+  environment:
+    name: staging
   script:
     - echo "Deploying to Firebase"
     - npm install
     - npm run build
+    - firebase hosting:channel:deploy $CI_ENVIRONMENT_NAME --token $FIREBASE_TOKEN
   rules:
-    - if: $CI_COMMIT_BRANCH === $CI_DEFAULT_BRANCH
-      variables:
-        _ENV: staging
-      script:
-        - NODE_ENV=$_ENV node firebase hosting:channel:deploy $_ENV --token $FIREBASE_TOKEN
+    - if: $CI_COMMIT_BRANCH === $CI_ENVIRONMENT_NAME
