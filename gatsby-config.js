@@ -6,6 +6,10 @@ getDevelopmentGatsbyOptions = (env) => {
 getProductionGatsbyOptions = (env) => {
       return {
         apiURL: env.STRAPI_URL,
+        loginData: {
+        identifier: env.STRAPI_USERNAME,
+        password: env.STRAPI_PASSWORD,
+      },
       }
 }
 
