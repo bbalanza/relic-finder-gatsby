@@ -23,7 +23,7 @@ module.exports = {
       ? getDevelopmentGatsbyOptions(process.env) 
       : getProductionGatsbyOptions(process.env) ),
       queryLimit: 1000, // Default to 100
-      collectionTypes: [`relics`],
+      collectionTypes: [`relics`, `categories`],
     },
   },
   ],
