@@ -16,6 +16,9 @@ getProductionGatsbyOptions = env => {
 }
 
 module.exports = {
+  siteMetadata: {
+    title: "Relic Finder"
+  },
   plugins: [
     "gatsby-plugin-postcss",
     {

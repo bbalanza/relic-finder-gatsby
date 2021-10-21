@@ -15,16 +15,17 @@
   },
   "dependencies": {
     "gatsby": "^4.0.0-zz-next.1",
+    "gatsby-cli": "^4.0.0",
     "gatsby-source-strapi": "^1.0.2",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
-  },
-  "devDependencies": {
+    "react-dom": "^17.0.1",
     "autoprefixer": "^10.3.7",
     "gatsby-plugin-postcss": "^4.14.0",
-    "postcss": "^8.3.9",
-    "prettier": "2.3.2",
-    "tailwindcss": "^2.2.16"
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.17"
+  },
+  "devDependencies": {
+    "prettier": "2.3.2"
   },
   "repository": {
     "type": "git",
