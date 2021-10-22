@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "relic-finder",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "Website to display details about the relics at the Gelman Stained Glass Museum",
   "version": "0.1.0",
   "license": "0BSD",
   "scripts": {
