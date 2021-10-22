@@ -1,10 +1,8 @@
 import React from 'react'
-
+import Nav from '../components/Nav'
 const Relic = () => {
     return (
-        <div className="bg-black">
-            <h1 className="text-blue-50">This is a relic</h1>
-        </div>
+        <Nav />
     )
 }
 
