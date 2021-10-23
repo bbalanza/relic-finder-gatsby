@@ -1,14 +1,17 @@
 import { graphql } from 'gatsby'
 import React from 'react'
 import Nav from '../components/Nav'
+import Layout from '../components/Layout'
 
-const Relic = ({data}: any) => {
+const Relic = ({ data }: any) => {
     const relic = data.strapiRelics;
     return (
         <>
             <Nav />
-            <h1>{relic.name}</h1>
-            <p>{relic.description}</p>
+            <Layout>
+                <h1>{relic.name}</h1>
+                <p>{relic.description}</p>
+            </Layout>
         </>
 
     )
