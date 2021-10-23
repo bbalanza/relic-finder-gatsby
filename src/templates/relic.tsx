@@ -7,7 +7,6 @@ const Relic = ({data}: any) => {
     return (
         <>
             <Nav />
-            <h1>You have rendered me!</h1>
             <h1>{relic.name}</h1>
             <p>{relic.description}</p>
         </>
