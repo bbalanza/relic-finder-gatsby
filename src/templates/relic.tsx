@@ -1,16 +1,20 @@
-import { graphql } from 'gatsby'
 import React from 'react'
+import { graphql } from 'gatsby'
+import ReactMarkdown from 'react-markdown'
+
 import Nav from '../components/Nav'
 import Layout from '../components/Layout'
-import ReactMarkdown from 'react-markdown'
+import Preview from '../components/Preview'
 
 const Relic = ({ data }: any) => {
     const relic = data.strapiRelics;
+    const previewImage = relic.images[0].localFile;
     return (
         <>
             <Nav />
             <Layout>
                 <h1>{relic.name}</h1>
+                <Preview localFile={previewImage}/> 
                 <ReactMarkdown children={relic.description} />
             </Layout>
         </>
@@ -23,13 +27,13 @@ query($id: String!) {
     strapiRelics(id: {eq: $id}) {
         name
         description
-        images {
+       images {
             localFile {
-                childrenImageSharp {
-                    gatsbyImageData(layout: FULL_WIDTH, placeholder: DOMINANT_COLOR)
+                childImageSharp {
+                    gatsbyImageData(layout: FULL_WIDTH)
                 }
             }
-        }
+        } 
     }
 }
 `;
