@@ -13,8 +13,7 @@ const Relic = ({ data }: any) => {
         <>
             <Nav />
             <Layout>
-                <h1>{relic.name}</h1>
-                <Preview localFile={previewImage}/> 
+                <Preview localFile={previewImage} name={relic.name}/> 
                 <ReactMarkdown children={relic.description} />
             </Layout>
         </>
