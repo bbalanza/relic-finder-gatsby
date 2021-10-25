@@ -8,7 +8,7 @@ type ButtonProps = {
 
 const Button : React.FC<ButtonProps> = (props: ButtonProps) => {
     return (
-        <a href={props.href} className={`${props.className ?? ''} p-5 rounded-sm text-white gradient`}>{props.text}</a>
+        <a href={props.href} className={`${props.className ?? ''} p-5 rounded-sm text-white nav-bar-gradient`}>{props.text}</a>
     )
 }
 
