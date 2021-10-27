@@ -1,4 +1,4 @@
-getDevelopmentGatsbyOptions = env => {
+getDevelopmentGatsbyOptions = () => {
   return {
     apiURL: `http://localhost:1337`,
     collectionTypes: [`relics`, `categories`],
@@ -7,10 +7,10 @@ getDevelopmentGatsbyOptions = env => {
 getProductionGatsbyOptions = env => {
   return {
     apiURL: env.STRAPI_URL,
+    collectionTypes: [`relics`, `categories`],
     loginData: {
       identifier: env.STRAPI_USERNAME,
       password: env.STRAPI_PASSWORD,
-      collectionTypes: [`relics`, `categories`],
     },
   }
 }
