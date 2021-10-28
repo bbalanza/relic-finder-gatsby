@@ -21,9 +21,6 @@ const Relic = ({ data }: any) => {
             <Layout>
                 <Preview localFile={previewImage} name={relic.name} />
                 <ReactMarkdown children={relic.description} />
-                <div className="text-center">
-                    <Button text='Return to Camera' onClick={goBack} />
-                </div>
             </Layout>
         </>
 
