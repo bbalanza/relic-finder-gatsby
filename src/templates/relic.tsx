@@ -11,16 +11,15 @@ const Relic = ({ data }: any) => {
     const relic = data.strapiRelics;
     const previewImage = relic.images[0].localFile;
 
-    const goBack = () => {
-        history.back();
-    }
-
     return (
         <>
             <Nav />
             <Layout>
                 <Preview localFile={previewImage} name={relic.name} />
                 <ReactMarkdown children={relic.description} />
+                <div className="text-center">
+                    <Button onClick={history.back}>Return to Camera</Button>
+                </div>
             </Layout>
         </>
 
