@@ -2,13 +2,15 @@ import React from "react";
 
 type ButtonProps = {
     text: string;
-    href: string;
+    href?: string;
     className?: string;
+    onClick?: () => {} | void;
 }
 
 const Button : React.FC<ButtonProps> = (props: ButtonProps) => {
     return (
-        <a href={props.href} className={`${props.className ?? ''} p-5 rounded-sm text-white nav-bar-gradient`}>{props.text}</a>
+        <a style={{cursor: "pointer"}} onClick={props.onClick} className={`${props.className ?? ''} p-5 rounded-sm text-white nav-bar-gradient`}>{props.text}</a>
+
     )
 }
 
