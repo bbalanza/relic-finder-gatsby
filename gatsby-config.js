@@ -28,7 +28,7 @@ module.exports = {
       resolve: `gatsby-source-strapi`,
       options: {
         ...(process.env.NODE_ENV === "development"
-          ? getDevelopmentGatsbyOptions(process.env)
+          ? getDevelopmentGatsbyOptions()
           : getProductionGatsbyOptions(process.env)),
         queryLimit: 1000, // Default to 100
       },

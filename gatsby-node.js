@@ -5,6 +5,7 @@ exports.createPages = async ({actions, graphql}) => {
             edges {
                 node {
                     id
+                    slug
                 }
             }
         }
@@ -12,8 +13,9 @@ exports.createPages = async ({actions, graphql}) => {
 `);
     data.allStrapiRelics.edges.forEach(edge => {
         const id = edge.node.id;
+        const slug = edge.node.slug;
         actions.createPage({
-            path: id,
+            path: slug,
             component: require.resolve(`./src/templates/relic.tsx`),
             context: {
                 id: id,
