@@ -6,7 +6,9 @@ export default function Home() {
   return (
     <>
       <Nav />
+    <div className="bg-black h-screen">
       <Scanner />
+    </div>
     </>
   )
 }
