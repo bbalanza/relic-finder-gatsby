@@ -1,19 +1,20 @@
 import React from "react";
+import {Link} from "@reach/router"
 
 type Button = {
     className?: string;
-    onClick?: () => {} | void;
+    to: string;
 }
 
 const Button: React.FC<Button> = (props) => {
     return (
-        <a
+        <Link
             {...props}
             style={{ cursor: "pointer" }}
             className={`${props.className ?? ''} p-5 rounded-sm text-white nav-bar-gradient`}
         >
             {props.children}
-        </a>
+        </Link>
 
     )
 }
