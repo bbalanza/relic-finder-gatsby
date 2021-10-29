@@ -2,16 +2,18 @@ import React from "react";
 import { useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 import { QrcodeErrorCallback, QrcodeSuccessCallback } from "html5-qrcode/esm/core";
-import { navigate } from "@reach/router";
+import { navigate } from "gatsby";
+import { Html5QrcodeFullConfig } from "html5-qrcode/esm/html5-qrcode";
 
 type Scanner = {
-    verbosity?: boolean;
 } 
 
 const Scanner: React.FC<Scanner> = (props) => {
-    const verbosity = props.verbosity ?? false; 
+    const scannerConfig: Html5QrcodeFullConfig = {
+       verbose: false, 
+    }
     useEffect(() => {
-        const html5QrCode = new Html5Qrcode("reader", verbosity);
+        const html5QrCode = new Html5Qrcode("reader", scannerConfig);
         const qrCodeSuccessCallback: QrcodeSuccessCallback = async (decodedText, decodedResult) => {
             await html5QrCode.stop()
             navigate(decodedText)
