@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 import { QrcodeErrorCallback, QrcodeSuccessCallback } from "html5-qrcode/esm/core";
+import { navigate } from "@reach/router";
 
 type Scanner = {
     verbosity?: boolean;
@@ -12,7 +13,7 @@ const Scanner: React.FC<Scanner> = (props) => {
     useEffect(() => {
         const html5QrCode = new Html5Qrcode("reader", verbosity);
         const qrCodeSuccessCallback: QrcodeSuccessCallback = (decodedText, decodedResult) => {
-            console.log(decodedText);
+            navigate(decodedText)
         };
         const QrcodeErrorCallback: QrcodeErrorCallback = (errorMessage, error) => {
             console.log(error)
