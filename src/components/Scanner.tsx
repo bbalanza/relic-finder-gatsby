@@ -12,7 +12,8 @@ const Scanner: React.FC<Scanner> = (props) => {
     const verbosity = props.verbosity ?? false; 
     useEffect(() => {
         const html5QrCode = new Html5Qrcode("reader", verbosity);
-        const qrCodeSuccessCallback: QrcodeSuccessCallback = (decodedText, decodedResult) => {
+        const qrCodeSuccessCallback: QrcodeSuccessCallback = async (decodedText, decodedResult) => {
+            await html5QrCode.stop()
             navigate(decodedText)
         };
         const QrcodeErrorCallback: QrcodeErrorCallback = (errorMessage, error) => {
