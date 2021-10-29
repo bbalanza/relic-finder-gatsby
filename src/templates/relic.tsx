@@ -10,11 +10,6 @@ import Button from '../components/Button'
 const Relic = ({ data }: any) => {
     const relic = data.strapiRelics;
     const previewImage = relic.images[0].localFile;
-
-    const goBack = () => {
-        history.back();
-    }
-
     return (
         <>
             <Nav />
@@ -22,7 +17,7 @@ const Relic = ({ data }: any) => {
                 <Preview localFile={previewImage} name={relic.name} />
                 <ReactMarkdown children={relic.description} />
                 <div className="text-center">
-                    <Button text='Return to Camera' onClick={goBack} />
+                    <Button to="/" >Return to Camera</Button>
                 </div>
             </Layout>
         </>

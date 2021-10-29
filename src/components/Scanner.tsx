@@ -1,31 +1,31 @@
 import React from "react";
 import { useEffect } from "react";
-import { Html5QrcodeScanner } from "html5-qrcode";
+import { Html5Qrcode } from "html5-qrcode";
 import { QrcodeErrorCallback, QrcodeSuccessCallback } from "html5-qrcode/esm/core";
-import {Html5QrcodeCameraScanConfig} from 'html5-qrcode/esm/html5-qrcode'
+import { navigate } from "gatsby";
+import { Html5QrcodeFullConfig } from "html5-qrcode/esm/html5-qrcode";
 
-interface IScanner {
-    Html5QrcodeCameraScanConfig: Html5QrcodeCameraScanConfig;
-    verbose?: boolean;
-    qrCodeSuccessCallback: QrcodeSuccessCallback;
-    qrCodeErrorCallback: QrcodeErrorCallback;
-}
+type Scanner = {
+} 
 
-const Scanner = (props: IScanner) => {
+const Scanner: React.FC<Scanner> = (props) => {
+    const scannerConfig: Html5QrcodeFullConfig = {
+       verbose: false, 
+    }
     useEffect(() => {
-        var config: Html5QrcodeCameraScanConfig = { ...props.Html5QrcodeCameraScanConfig }
-        
-        let html5QrcodeScanner: Html5QrcodeScanner = new Html5QrcodeScanner(
-            'qr-code-full-region', config, props.verbose ?? false);
-        html5QrcodeScanner.render(
-            props.qrCodeSuccessCallback, props.qrCodeErrorCallback);
-        return () => {
-            html5QrcodeScanner.clear().catch(error => {
-                console.error('Failed to clear html5QrcodeScanner. ', error);
-            });
+        const html5QrCode = new Html5Qrcode("reader", scannerConfig);
+        const qrCodeSuccessCallback: QrcodeSuccessCallback = async (decodedText, decodedResult) => {
+            await html5QrCode.stop()
+            navigate(decodedText)
+        };
+        const QrcodeErrorCallback: QrcodeErrorCallback = (errorMessage, error) => {
+            console.log(error)
         }
+        const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+        html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback, QrcodeErrorCallback);
     }, []);
-        return (<div id={'qr-code-full-region'} />);
+
+    return (<div id={'reader'} />);
 }
 
-export {Scanner, Html5QrcodeCameraScanConfig};
+export {Scanner};

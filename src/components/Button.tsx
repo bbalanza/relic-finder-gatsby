@@ -1,15 +1,20 @@
 import React from "react";
+import {Link} from "gatsby"
 
-type ButtonProps = {
-    text: string;
-    href?: string;
+type Button = {
     className?: string;
-    onClick?: () => {} | void;
+    to: string;
 }
 
-const Button : React.FC<ButtonProps> = (props: ButtonProps) => {
+const Button: React.FC<Button> = (props) => {
     return (
-        <a style={{cursor: "pointer"}} onClick={props.onClick} className={`${props.className ?? ''} p-5 rounded-sm text-white nav-bar-gradient`}>{props.text}</a>
+        <Link
+            {...props}
+            style={{ cursor: "pointer" }}
+            className={`${props.className ?? ''} p-5 rounded-sm text-white nav-bar-gradient`}
+        >
+            {props.children}
+        </Link>
 
     )
 }
