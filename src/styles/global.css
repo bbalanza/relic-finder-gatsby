@@ -26,6 +26,6 @@
 
 @layer components {
   .nav-bar-gradient {
-    @apply bg-gradient-to-r from-accent-100 via-accent-200 to-accent-300 h-2;
+    @apply bg-gradient-to-r from-accent-100 via-accent-200 to-accent-300 h-4;
   }
 }
