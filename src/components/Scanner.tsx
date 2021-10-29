@@ -20,7 +20,7 @@ const Scanner: React.FC<Scanner> = (props) => {
             console.log(error)
         }
         const config = { fps: 10, qrbox: { width: 250, height: 250 } };
-        html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback,undefined);
+        html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback, QrcodeErrorCallback);
     }, []);
 
     return (<div id={'reader'} />);
