@@ -11,10 +11,13 @@ const stripUrlParams = (decodedText: string): string => {
     return parameterRegEx.exec(decodedText)?.toString() ?? '';
 }
 
-const findScreenAspectRatio = (): number => {
-    const realWidth = window.screen.width * window.devicePixelRatio;
-    const realHeight = window.screen.height * window.devicePixelRatio;
-    return realWidth / realHeight;
+const findScreenWidth = (): number => {
+    console.log(window.screen.width)
+    return window.screen.width;
+}
+
+const findScreenHeight = (): number => {
+    return window.screen.height;
 }
 
 const Scanner: React.FC = (props) => {
@@ -22,7 +25,6 @@ const Scanner: React.FC = (props) => {
         verbose: false,
     }
     useEffect(() => {
-        const aspectRatio = findScreenAspectRatio();
         const html5QrCode = new Html5Qrcode("reader", scannerDebugConfig);
         const qrCodeSuccessCallback: QrcodeSuccessCallback = async (decodedText, decodedResult) => {
             await html5QrCode.stop()
@@ -31,11 +33,11 @@ const Scanner: React.FC = (props) => {
         const QrcodeErrorCallback: QrcodeErrorCallback = (errorMessage, error) => {
             console.log(error)
         }
-        const qrScannerConfig = { fps: 10, aspectRatio: aspectRatio, qrbox: { width: 250, height: 250 } };
+        const qrScannerConfig = { fps: 10, aspectRatio: 1, qrbox: { width: 250, height: 250 } };
         html5QrCode.start({ facingMode: "environment" }, qrScannerConfig, qrCodeSuccessCallback, QrcodeErrorCallback);
     }, []);
 
-    return (<div id={'reader'} />);
+    return (<div id={'reader'} style={{ width: findScreenWidth()}} />);
 }
 
 export { Scanner };
