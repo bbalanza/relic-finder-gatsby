@@ -14,7 +14,7 @@ const stripUrlParams = (decodedText: string): string => {
 const findScreenAspectRatio = (): number => {
     const realWidth = window.screen.width * window.devicePixelRatio;
     const realHeight = window.screen.height * window.devicePixelRatio;
-    return realHeight / realWidth;
+    return realWidth / realHeight;
 }
 
 const Scanner: React.FC = (props) => {
