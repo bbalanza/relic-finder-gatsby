@@ -20,12 +20,18 @@
   }
 
   body {
-    @apply text-base font-sans md:text-base;
+    @apply text-base font-sans text-gray-200 bg-black md:text-base;
   }
 }
 
 @layer components {
   .nav-bar-gradient {
     @apply bg-gradient-to-r from-accent-100 via-accent-200 to-accent-300 h-4;
+  }
+  .gradient-to-bg {
+    @apply bg-gradient-to-b from-transparent via-transparent to-black;
+  }
+  .layout {
+    @apply container space-y-5 mt-2 sm:mt-4 pb-10 block;
   }
 }
