@@ -21,9 +21,8 @@ const Scanner: React.FC = (props) => {
     const scannerDebugConfig: Html5QrcodeFullConfig = {
         verbose: false,
     }
-    const aspectRatio = findScreenAspectRatio();
-
     useEffect(() => {
+        const aspectRatio = findScreenAspectRatio();
         const html5QrCode = new Html5Qrcode("reader", scannerDebugConfig);
         const qrCodeSuccessCallback: QrcodeSuccessCallback = async (decodedText, decodedResult) => {
             await html5QrCode.stop()
