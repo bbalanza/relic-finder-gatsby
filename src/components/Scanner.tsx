@@ -11,7 +11,7 @@ const stripUrlParams = (decodedText: string): string => {
     return parameterRegEx.exec(decodedText)?.toString() ?? '';
 }
 
-const ifBrowser = typeof window != undefined;
+const ifBrowser = typeof window != "undefined";
 
 const findScreenWidth = (): number => {
     return ifBrowser ? window.screen.width : 0;
