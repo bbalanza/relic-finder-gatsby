@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "gatsby"
+import { Link } from "gatsby"
 
 type Button = {
     className?: string;
@@ -8,14 +8,13 @@ type Button = {
 
 const Button: React.FC<Button> = (props) => {
     return (
-        <Link
-            {...props}
-            style={{ cursor: "pointer" }}
-            className={`${props.className ?? ''} p-5 rounded-sm text-white nav-bar-gradient`}
-        >
-            {props.children}
-        </Link>
-
+                <Link
+                    {...props}
+                    style={{ cursor: "pointer" }}
+                    className={`${props.className ?? ''} p-5 rounded-sm text-white nav-bar-gradient`}
+                >
+                    {props.children}
+                </Link>
     )
 }
 

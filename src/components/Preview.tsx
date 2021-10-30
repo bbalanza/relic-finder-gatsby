@@ -17,9 +17,9 @@ const Preview: React.FC<PreviewProps> = (props: PreviewProps) => {
                     image={image!}
                     alt={"Relic Image"}
                 />
-            <div className="grid relative items-end bg-gradient-to-b from-transparent via-transparent to-white row-start-1 col-start-1">
+            <div className="grid relative items-end gradient-to-bg row-start-1 col-start-1">
             </div>
-            <h2 className="">{props.name}</h2>
+            <h2 className="pt-2">{props.name}</h2>
         </div>
         </>
     )

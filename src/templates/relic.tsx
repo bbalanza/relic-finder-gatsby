@@ -16,12 +16,13 @@ const Relic = ({ data }: any) => {
             <Layout>
                 <Preview localFile={previewImage} name={relic.name} />
                 <ReactMarkdown children={relic.description} />
-                <div className="text-center">
-                    <Button to="/" >Return to Camera</Button>
+                <div className="flex justify-center">
+                    <h4 className="mt-5">
+                        <Button to="/" >Return to Camera</Button>
+                    </h4>
                 </div>
             </Layout>
         </>
-
     )
 }
 
