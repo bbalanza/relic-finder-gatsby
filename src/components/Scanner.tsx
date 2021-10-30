@@ -11,13 +11,14 @@ const stripUrlParams = (decodedText: string): string => {
     return parameterRegEx.exec(decodedText)?.toString() ?? '';
 }
 
+const ifBrowser = typeof window != undefined;
+
 const findScreenWidth = (): number => {
-    console.log(window.screen.width)
-    return window.screen.width;
+    return ifBrowser ? window.screen.width : 0;
 }
 
 const findScreenHeight = (): number => {
-    return window.screen.height;
+    return ifBrowser ? window.screen.height : 0;
 }
 
 const Scanner: React.FC = (props) => {
@@ -25,6 +26,7 @@ const Scanner: React.FC = (props) => {
         verbose: false,
     }
     useEffect(() => {
+        const scannerWidth = findScreenWidth();
         const html5QrCode = new Html5Qrcode("reader", scannerDebugConfig);
         const qrCodeSuccessCallback: QrcodeSuccessCallback = async (decodedText, decodedResult) => {
             await html5QrCode.stop()
@@ -37,7 +39,7 @@ const Scanner: React.FC = (props) => {
         html5QrCode.start({ facingMode: "environment" }, qrScannerConfig, qrCodeSuccessCallback, QrcodeErrorCallback);
     }, []);
 
-    return (<div id={'reader'} style={{ width: findScreenWidth()}} />);
+    return (<div id={'reader'} style={{ width: findScreenWidth(), height: findScreenHeight()}} />);
 }
 
 export { Scanner };
