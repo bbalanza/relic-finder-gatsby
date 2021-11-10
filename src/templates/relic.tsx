@@ -9,7 +9,7 @@ import Button from '../components/Button'
 
 const Relic = ({ data }: any) => {
     const relic = data.strapiRelics;
-    const previewImage = relic.images[0].localFile;
+    const previewImage = relic.images.localFile;
     return (
         <>
             <Nav />
@@ -38,6 +38,11 @@ query($id: String!) {
                 }
             }
         } 
+        audio_description {
+          localFile {
+            url
+          }
+        }
     }
 }
 `;
