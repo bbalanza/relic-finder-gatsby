@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 import { QrcodeErrorCallback, QrcodeSuccessCallback } from "html5-qrcode/esm/core";
 import { navigate } from "gatsby";
-import { Html5QrcodeFullConfig } from "html5-qrcode/esm/html5-qrcode";
+import { Html5QrcodeCameraScanConfig, Html5QrcodeFullConfig } from "html5-qrcode/esm/html5-qrcode";
 
 /* TODO: Test!!! */
 const stripUrlParams = (decodedText: string): string => {
@@ -13,20 +13,16 @@ const stripUrlParams = (decodedText: string): string => {
 
 const ifBrowser = typeof window != "undefined";
 
-const findScreenWidth = (): number => {
-    return ifBrowser ? window.screen.width : 0;
-}
-
-const findScreenHeight = (): number => {
-    return ifBrowser ? window.screen.height : 0;
-}
-
-const Scanner: React.FC = (props) => {
+const Scanner: React.FC = () => {
     const scannerDebugConfig: Html5QrcodeFullConfig = {
         verbose: false,
     }
+    const [screenWidth, setScreenWidth] = useState(0)
+    const [screenHeight, setScreenHeight] = useState(0)
+
     useEffect(() => {
-        const scannerWidth = findScreenWidth();
+        setScreenWidth(window.screen.width);
+        setScreenHeight(window.screen.height);
         const html5QrCode = new Html5Qrcode("reader", scannerDebugConfig);
         const qrCodeSuccessCallback: QrcodeSuccessCallback = async (decodedText, decodedResult) => {
             await html5QrCode.stop()
@@ -35,11 +31,11 @@ const Scanner: React.FC = (props) => {
         const QrcodeErrorCallback: QrcodeErrorCallback = (errorMessage, error) => {
             console.log(error)
         }
-        const qrScannerConfig = { fps: 10, aspectRatio: 1, qrbox: { width: 250, height: 250 } };
+        const qrScannerConfig: Html5QrcodeCameraScanConfig = { fps: 10, aspectRatio: 1, qrbox: 250 };
         html5QrCode.start({ facingMode: "environment" }, qrScannerConfig, qrCodeSuccessCallback, QrcodeErrorCallback);
     }, []);
 
-    return (<div id={'reader'} style={{ width: findScreenWidth(), height: findScreenHeight()}} />);
+    return (<div id={'reader'} />);
 }
 
 export { Scanner };
