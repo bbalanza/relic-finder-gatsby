@@ -1,21 +1,23 @@
 import React from "react";
 import { Link } from "gatsby"
 
-type Button = {
+type ButtonProps = {
     className?: string;
     to: string;
-}
+} & { children?: React.ReactNode }
 
-const Button: React.FC<Button> = (props) => {
-    return (
-                <Link
-                    {...props}
-                    style={{ cursor: "pointer" }}
-                    className={`${props.className ?? ''} p-5 rounded-sm text-white nav-bar-gradient`}
-                >
-                    {props.children}
-                </Link>
-    )
+const Button = (props: ButtonProps) => {
+    return <>
+        <h4 className={`${props.className ?? ''}`}>
+            <Link
+                to={props.to}
+                style={{ cursor: "pointer" }}
+                className={` p-5 rounded-sm text-white nav-bar-gradient`}
+            >
+                {props.children}
+            </Link>
+        </h4>
+    </>
 }
 
 export default Button;

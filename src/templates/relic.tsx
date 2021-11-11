@@ -20,9 +20,7 @@ const Relic = ({ data }: any) => {
                 <ReactMarkdown children={relic.description} />
                 <Player audioUrl={audio} />
                 <div className="flex justify-center">
-                    <h4 className="mt-5">
                         <Button to="/" >Return to Camera</Button>
-                    </h4>
                 </div>
             </Layout>
         </>
