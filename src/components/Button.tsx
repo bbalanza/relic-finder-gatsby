@@ -9,13 +9,11 @@ type ButtonProps = {
 
 const Button = (props: ButtonProps) => {
     return <>
-        <div className={`${props.className ?? ''}`}>
-            <h4 className="mt-5">
+        <div className={`h-full`}>
+            <h4 className={`${props.className ?? ''}`}>
                 <Link
                     to={props.to}
-                    style={{ cursor: "pointer" }}
-                    className={`p-5 rounded-sm text-white nav-bar-gradient`}
-                >
+                    className={`p-5 rounded-sm text-white nav-bar-gradient`}>
                     {props.children}
                 </Link>
             </h4>

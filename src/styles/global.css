@@ -32,6 +32,6 @@
     @apply bg-gradient-to-b from-transparent via-transparent to-black;
   }
   .layout {
-    @apply container space-y-5 mt-2 sm:mt-4 pb-10 flex flex-col justify-center;
+    @apply container space-y-5 mt-2 sm:mt-4 pb-10 flex flex-col justify-start items-stretch;
   }
 }

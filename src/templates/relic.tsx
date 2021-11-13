@@ -19,7 +19,7 @@ const Relic = ({ data }: any) => {
                 <Preview localFile={previewImage} name={relic.name} />
                 <ReactMarkdown children={relic.description} />
                 <Player audioUrl={audio} />
-                <Button className="mt-5 text-center" to="/" >Return to Camera</Button>
+                <Button className="text-center mt-5" to="/" >Return to Camera</Button>
             </Layout>
         </>
     )
