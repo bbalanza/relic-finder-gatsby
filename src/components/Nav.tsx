@@ -1,6 +1,11 @@
 import React from "react"
 import Logo from "../../static/logo.svg"
-export default function Nav() {
+
+type Nav = {
+
+} & React.HTMLAttributes<HTMLDivElement>
+
+const Nav = () => {
     return (
         <header>
             <div className="nav-bar-gradient"></div>
@@ -10,3 +15,5 @@ export default function Nav() {
         </header>
     )
 }
+
+export default Nav;
