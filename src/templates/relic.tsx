@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown'
 
 import Layout from '../components/Layout'
 import Preview from '../components/Preview'
-import Button from '../components/Button/Button'
+import { Button } from '../components/Button'
 import Player from '../components/Player'
 
 const Relic = ({ data }: any) => {
