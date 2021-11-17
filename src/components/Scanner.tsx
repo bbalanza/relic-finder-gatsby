@@ -11,28 +11,28 @@ const stripUrlParams = (decodedText: string): string => {
     return parameterRegEx.exec(decodedText)?.toString() ?? '';
 }
 
-const ifBrowser = typeof window != "undefined";
+const getRelicID = (url:string): string => stripUrlParams(url)
+
+const getCameraRatio = (screenWidth: number, screenHeight: number): number => {
+   return (16/9) * .8; 
+}
 
 const Scanner: React.FC = () => {
     const scannerDebugConfig: Html5QrcodeFullConfig = {
         verbose: false,
     }
-    const [screenWidth, setScreenWidth] = useState(0)
-    const [screenHeight, setScreenHeight] = useState(0)
 
     useEffect(() => {
-        setScreenWidth(window.screen.width);
-        setScreenHeight(window.screen.height);
         const html5QrCode = new Html5Qrcode("reader", scannerDebugConfig);
-        const qrCodeSuccessCallback: QrcodeSuccessCallback = async (decodedText, decodedResult) => {
+        const qrCodeSuccessCallback: QrcodeSuccessCallback = async (decodedText) => {
             await html5QrCode.stop()
-            navigate(stripUrlParams(decodedText))
+            navigate(getRelicID(decodedText))
         };
-        const QrcodeErrorCallback: QrcodeErrorCallback = (errorMessage, error) => {
+        const qrCodeErrorCallback: QrcodeErrorCallback = (errorMessage, error) => {
             console.log(error)
         }
-        const qrScannerConfig: Html5QrcodeCameraScanConfig = { fps: 10, aspectRatio: 1, qrbox: 250 };
-        html5QrCode.start({ facingMode: "environment" }, qrScannerConfig, qrCodeSuccessCallback, QrcodeErrorCallback);
+        const qrScannerConfig: Html5QrcodeCameraScanConfig = { fps: 10, aspectRatio: getCameraRatio(window.screen.width, window.screen.height), qrbox: 250 };
+        html5QrCode.start({ facingMode: "environment" }, qrScannerConfig, qrCodeSuccessCallback, qrCodeErrorCallback);
     }, []);
 
     return (<div id={'reader'} />);
