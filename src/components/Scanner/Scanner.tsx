@@ -38,4 +38,4 @@ const Scanner: React.FC = () => {
     return (<div id={'reader'} />);
 }
 
-export { Scanner };
+export default Scanner;
