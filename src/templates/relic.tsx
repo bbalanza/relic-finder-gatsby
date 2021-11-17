@@ -2,10 +2,9 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import ReactMarkdown from 'react-markdown'
 
-import Nav from '../components/Nav'
 import Layout from '../components/Layout'
 import Preview from '../components/Preview'
-import Button from '../components/Button'
+import Button from '../components/Button/Button'
 import Player from '../components/Player'
 
 const Relic = ({ data }: any) => {
@@ -14,7 +13,6 @@ const Relic = ({ data }: any) => {
     const audio = relic.audio_description.localFile.url;
     return (
         <>
-            <Nav />
             <Layout>
                 <Preview localFile={previewImage} name={relic.name} />
                 <ReactMarkdown children={relic.description} />

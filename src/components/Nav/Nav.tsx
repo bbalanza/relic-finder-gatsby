@@ -7,9 +7,9 @@ type Nav = {
 
 const Nav = (props: Nav) => {
     return (
-        <header className={`${props.className}`}>
-            <div className={`h-1/6 w-full nav-bar-gradient`}></div>
-            <nav className={`h-5/6 w-full bg-black flex items-center justify-center`}>
+        <header className={`${props.className} flex flex-col justify-start`}>
+            <div className={`h-4 flex-initial w-full nav-bar-gradient`}></div>
+            <nav className={`flex-grow h-5/6 w-full bg-black flex items-center justify-center`}>
                 <Logo className="h-3/5 fill-current text-white" />
             </nav>
         </header>
