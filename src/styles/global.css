@@ -20,13 +20,19 @@
   }
 
   body {
-    @apply h-screen text-base font-sans text-gray-200 bg-black md:text-base h-screen;
+    @apply h-screen text-base font-sans text-gray-200 bg-black md:text-base;
   }
 }
 
 @layer components {
+  #gatsby-focus-wrapper {
+    @apply h-full
+  }
+  #___gatsby {
+    @apply h-full
+  }
   .nav-bar-gradient {
-    @apply bg-gradient-to-r from-accent-100 via-accent-200 to-accent-300 h-4;
+    @apply bg-gradient-to-r from-accent-100 via-accent-200 to-accent-300;
   }
   .gradient-to-bg {
     @apply bg-gradient-to-b from-transparent via-transparent to-black;

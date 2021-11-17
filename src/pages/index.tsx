@@ -5,7 +5,7 @@ import { Scanner} from "../components/Scanner"
 export default function Home() {
   return (
     <>
-      <Nav />
+      <Nav className="h-1/6 sm:h-1/5"/>
       <Scanner />
     </>
   )
