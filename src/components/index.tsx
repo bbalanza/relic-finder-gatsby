@@ -1,5 +1,5 @@
 export { Button } from './Button'
-export { Layout } from './Layout'
+export { Content } from './Content'
 export { Canvas } from './Canvas'
 export { Nav } from './Nav'
 export { Player } from './Player'

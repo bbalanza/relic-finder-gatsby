@@ -1,17 +1,17 @@
 import React from "react";
 
-type LayoutProps = {
+type ContentProps = {
 
 } & { children?: React.ReactNode} & React.HTMLAttributes<HTMLDivElement>
 
-const Layout = (props: LayoutProps) => {
+const Content = (props: ContentProps) => {
     return (
-        <div
+        <main
             {...props}
-            className={`${props.className ?? ''} layout`}
+            className={`${props.className ?? ''} content`}
         >
             {props.children}
-        </div>
+        </main>
     );
 }
-export default Layout;
+export default Content;

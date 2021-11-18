@@ -1,24 +1,22 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import ReactMarkdown from 'react-markdown'
-import { Nav, Layout, RelicPreview, Button, Player, Canvas } from '../components/'
+import { Nav, Content, RelicPreview, Button, Player, Canvas } from '../components/'
 
 const Relic = ({ data }: any) => {
     const relic = data.strapiRelics;
     const previewImage = relic.images.localFile;
     const audio = relic.audio_description.localFile.url;
     return (
-        <>
             <Canvas>
                 <Nav />
-                <Layout>
+                <Content>
                     <RelicPreview localFile={previewImage} name={relic.name} />
                     <ReactMarkdown children={relic.description} />
                     <Player audioUrl={audio} />
                     <Button className="text-center mt-5 mb-10 " to="/" >Return to QR Scanner</Button>
-                </Layout>
+                </Content>
             </Canvas>
-        </>
     )
 }
 
