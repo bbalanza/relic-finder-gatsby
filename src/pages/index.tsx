@@ -1,11 +1,11 @@
 import React from "react"
-import { Nav, Scanner, Content } from "../components/"
+import { Nav, Scanner, Canvas } from "../components/"
 
 export default function Home() {
   return (
-    <Content>
+    <Canvas>
       <Nav className="h-1/6 sm:h-1/5" />
       <Scanner />
-    </Content>
+    </Canvas>
   )
 }
