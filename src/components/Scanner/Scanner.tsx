@@ -14,7 +14,7 @@ const stripUrlParams = (decodedText: string): string => {
 const getRelicID = (url:string): string => stripUrlParams(url)
 
 const getCameraRatio = (screenWidth: number, screenHeight: number): number => {
-   return (16/9) * .8; 
+   return (16/9) * .76; 
 }
 
 const Scanner: React.FC = () => {
