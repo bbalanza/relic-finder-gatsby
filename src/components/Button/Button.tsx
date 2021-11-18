@@ -3,13 +3,12 @@ import { Link } from "gatsby"
 
 
 type ButtonProps = {
-    className?: string;
     to: string;
-} & { children?: React.ReactNode }
+} & { children?: React.ReactNode } & React.HTMLAttributes<HTMLHeadingElement>
 
 const Button = (props: ButtonProps) => {
     return <>
-        <div className={`h-full`}>
+        <div>
             <h4 className={`${props.className ?? ''}`}>
                 <Link
                     to={props.to}
@@ -17,8 +16,8 @@ const Button = (props: ButtonProps) => {
                     {props.children}
                 </Link>
             </h4>
-        </div>
 
+        </div>
     </>
 }
 
