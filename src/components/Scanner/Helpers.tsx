@@ -8,3 +8,5 @@ const getRelicID = (url:string): string => stripUrlParams(url)
 const getCameraRatio = (screenWidth: number, screenHeight: number): number => {
    return (16/9) * .76; 
 }
+
+export default {stripUrlParams, getRelicID, getCameraRatio};

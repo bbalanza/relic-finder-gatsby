@@ -2,12 +2,7 @@ import React from "react";
 import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
 import Relic from "../../templates/relic";
 
-interface PreviewProps {
-    localFile: any;
-    name: string;
-}
-
-const RelicPreview: React.FC<PreviewProps> = (props: PreviewProps) => {
+const RelicPreview = (props: PreviewProps) => {
     const image = getImage(props.localFile);
     return (
         <>
@@ -19,7 +14,7 @@ const RelicPreview: React.FC<PreviewProps> = (props: PreviewProps) => {
                 />
             <div className="grid relative items-end gradient-to-bg row-start-1 col-start-1">
             </div>
-            <h2 className="pt-2">{props.name}</h2>
+            {props.children}
         </div>
         </>
     )

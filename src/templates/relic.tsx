@@ -8,15 +8,17 @@ const Relic = ({ data }: any) => {
     const previewImage = relic.images.localFile;
     const audio = relic.audio_description.localFile.url;
     return (
-            <Canvas>
-                <Nav />
-                <Content>
-                    <RelicPreview localFile={previewImage} name={relic.name} />
-                    <ReactMarkdown children={relic.description} />
-                    <Player audioUrl={audio} />
-                    <Button className="text-center mt-5 mb-10 " to="/" >Return to QR Scanner</Button>
-                </Content>
-            </Canvas>
+        <Canvas>
+            <Nav />
+            <Content>
+                <RelicPreview localFile={previewImage}>
+                    <h2 className="pt-2">{relic.name}</h2>
+                </RelicPreview>
+                <ReactMarkdown children={relic.description} />
+                <Player audioUrl={audio} />
+                <Button className="text-center mt-5 mb-10 " to="/" >Return to QR Scanner</Button>
+            </Content>
+        </Canvas>
     )
 }
 
