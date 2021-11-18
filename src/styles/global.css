@@ -20,16 +20,13 @@
   }
 
   body {
-    @apply h-screen text-base font-sans text-gray-200 bg-black md:text-base;
+    @apply text-base font-sans text-gray-200 bg-black md:text-base;
   }
 }
 
 @layer components {
-  #gatsby-focus-wrapper {
-    @apply h-full
-  }
-  #___gatsby {
-    @apply h-full
+  .content {
+    @apply h-screen;
   }
   .nav-bar-gradient {
     @apply bg-gradient-to-r from-accent-100 via-accent-200 to-accent-300;
