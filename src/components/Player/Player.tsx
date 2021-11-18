@@ -1,14 +1,9 @@
 import React from "react"
 import { ReactElement } from "react-markdown/lib/react-markdown";
 
-type Player = {
-    audioUrl: string
-} & Partial<Element>
-
-const Player: React.FC<Player> = (props: Player): ReactElement => {
-    return <>
-        <div
-            className="flex-auto self-center"
+const Player = (props: Player): ReactElement => {
+    return <div
+            className={`${props.className ?? ''} flex-auto self-center`}
         >
             <audio
                 controls
@@ -18,7 +13,6 @@ const Player: React.FC<Player> = (props: Player): ReactElement => {
                 <code>audio</code> element.
             </audio>
         </div>
-    </>
 }
 
 export default Player;
