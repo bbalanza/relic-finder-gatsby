@@ -6,7 +6,7 @@ const RelicPreview = (props: PreviewProps) => {
     const image = getImage(props.localFile);
     return (
         <>
-        <div className="grid">
+        <div className={`${props.className} grid`}>
                 <GatsbyImage
                     className="row-start-1 col-start-1"
                     image={image!}

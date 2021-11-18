@@ -1,3 +1,3 @@
 type PreviewProps = {
     localFile: any;
-} & {children?: React.ReactNode}
+} & {children?: React.ReactNode} & React.HtmlHTMLAttributes<HTMLDivElement>
