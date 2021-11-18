@@ -1,13 +1,13 @@
 import React from "react";
 import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
-import Relic from "../templates/relic";
+import Relic from "../../templates/relic";
 
 interface PreviewProps {
     localFile: any;
     name: string;
 }
 
-const Preview: React.FC<PreviewProps> = (props: PreviewProps) => {
+const RelicPreview: React.FC<PreviewProps> = (props: PreviewProps) => {
     const image = getImage(props.localFile);
     return (
         <>
@@ -25,4 +25,4 @@ const Preview: React.FC<PreviewProps> = (props: PreviewProps) => {
     )
 }
 
-export default Preview
+export default RelicPreview

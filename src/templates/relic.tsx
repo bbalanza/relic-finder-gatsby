@@ -4,9 +4,9 @@ import ReactMarkdown from 'react-markdown'
 
 import { Nav } from '../components/Nav'
 import { Layout } from '../components/Layout'
-import Preview from '../components/Preview'
+import { RelicPreview } from '../components/RelicPreview'
 import { Button } from '../components/Button'
-import Player from '../components/Player'
+import { Player } from '../components/Player'
 
 const Relic = ({ data }: any) => {
     const relic = data.strapiRelics;
@@ -16,7 +16,7 @@ const Relic = ({ data }: any) => {
         <>
             <Nav />
             <Layout>
-                <Preview localFile={previewImage} name={relic.name} />
+                <RelicPreview localFile={previewImage} name={relic.name} />
                 <ReactMarkdown children={relic.description} />
                 <Player audioUrl={audio} />
                 <Button className="text-center mt-5 mb-10 " to="/" >Return to Camera</Button>
