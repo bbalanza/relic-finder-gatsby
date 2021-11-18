@@ -1,6 +1,10 @@
 import React from "react";
-import { Nav } from "../Nav"
-const Layout: React.FC = (props) => {
+
+type LayoutProps = {
+
+} & { children?: React.ReactNode} & React.HTMLAttributes<HTMLDivElement>
+
+const Layout = (props: LayoutProps) => {
     return (
         <div
             className={`layout`}
