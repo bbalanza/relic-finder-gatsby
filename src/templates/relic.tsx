@@ -1,12 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import ReactMarkdown from 'react-markdown'
-
-import { Nav } from '../components/Nav'
-import { Layout } from '../components/Layout'
-import { RelicPreview } from '../components/RelicPreview'
-import { Button } from '../components/Button'
-import { Player } from '../components/Player'
+import { Nav, Layout, RelicPreview, Button, Player } from '../components/'
 
 const Relic = ({ data }: any) => {
     const relic = data.strapiRelics;

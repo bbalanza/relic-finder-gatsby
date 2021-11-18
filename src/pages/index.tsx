@@ -1,6 +1,5 @@
 import React from "react"
-import { Nav } from "../components/Nav"
-import { Scanner } from "../components/Scanner"
+import { Nav, Scanner } from "../components/"
 
 export default function Home() {
   return (
