@@ -7,7 +7,8 @@ type LayoutProps = {
 const Layout = (props: LayoutProps) => {
     return (
         <div
-            className={`layout`}
+            {...props}
+            className={`${props.className ?? ''} layout`}
         >
             {props.children}
         </div>
