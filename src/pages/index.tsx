@@ -3,7 +3,7 @@ import { Nav, Scanner, Canvas } from "../components/"
 
 export default function Home() {
   return (
-    <Canvas className="overflow-y-hidden">
+    <Canvas>
       <Nav/>
       <Scanner />
     </Canvas>
