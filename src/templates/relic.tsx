@@ -1,27 +1,24 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import ReactMarkdown from 'react-markdown'
-
-import Nav from '../components/Nav'
-import Layout from '../components/Layout'
-import Preview from '../components/Preview'
-import Button from '../components/Button'
+import { Nav, Content, RelicPreview, Button, Player, Canvas } from '../components/'
 
 const Relic = ({ data }: any) => {
     const relic = data.strapiRelics;
-    const previewImage = relic.images[0].localFile;
+    const previewImage = relic.images.localFile;
+    const audio = relic.audio_description.localFile.url;
     return (
-        <>
+        <Canvas>
             <Nav />
-            <Layout>
-                <Preview localFile={previewImage} name={relic.name} />
+            <Content>
+                <RelicPreview localFile={previewImage}>
+                    <h2 className="pt-2">{relic.name}</h2>
+                </RelicPreview>
                 <ReactMarkdown children={relic.description} />
-                <div className="text-center">
-                    <Button to="/" >Return to Camera</Button>
-                </div>
-            </Layout>
-        </>
-
+                <Player audioUrl={audio} />
+                <Button className="text-center mt-5 mb-10 " to="/" >Return to QR Scanner</Button>
+            </Content>
+        </Canvas>
     )
 }
 
@@ -37,7 +34,14 @@ query($id: String!) {
                 }
             }
         } 
+        audio_description {
+          localFile {
+            url
+          }
+        }
     }
 }
 `;
 export default Relic;
+
+

@@ -1,14 +1,11 @@
 import React from "react"
-import Nav from "../components/Nav"
-import { Scanner} from "../components/Scanner"
+import { Nav, Scanner, Canvas } from "../components/"
 
 export default function Home() {
   return (
-    <>
-      <Nav />
-    <div className="bg-black h-screen">
+    <Canvas className="overflow-y-hidden">
+      <Nav/>
       <Scanner />
-    </div>
-    </>
+    </Canvas>
   )
 }

@@ -1,8 +1,17 @@
-getDevelopmentGatsbyOptions = () => {
-  return {
-    apiURL: `http://localhost:1337`,
-    collectionTypes: [`relics`, `categories`],
-  }
+getDevelopmentGatsbyOptions = env => {
+  return env.CLOUD_DEV
+    ? {
+      apiURL: env.STRAPI_URL,
+      collectionTypes: [`relics`, `categories`],
+      loginData: {
+        identifier: env.STRAPI_USERNAME,
+        password: env.STRAPI_PASSWORD,
+      }
+    }
+    : {
+      apiURL: `http://localhost:1337`,
+      collectionTypes: [`relics`, `categories`],
+    }
 }
 getProductionGatsbyOptions = env => {
   return {
@@ -14,6 +23,10 @@ getProductionGatsbyOptions = env => {
     },
   }
 }
+
+require("dotenv").config({
+  path: `.env`,
+})
 
 module.exports = {
   siteMetadata: {
@@ -28,18 +41,18 @@ module.exports = {
       resolve: `gatsby-source-strapi`,
       options: {
         ...(process.env.NODE_ENV === "development"
-          ? getDevelopmentGatsbyOptions()
+          ? getDevelopmentGatsbyOptions(process.env)
           : getProductionGatsbyOptions(process.env)),
         queryLimit: 1000, // Default to 100
       },
     },
     {
-    resolve: "gatsby-plugin-react-svg",
-    options: {
-      rule: {
-        include: /static/ // See below to configure properly
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /static/
+        }
       }
-    }
-  },
+    },
   ],
 }
