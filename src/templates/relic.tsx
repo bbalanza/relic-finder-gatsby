@@ -8,7 +8,7 @@ const Relic = ({ data }: any) => {
     const previewImage = relic.images.localFile;
     const audio = relic.audio_description.localFile.url;
     return (
-        <Canvas>
+        <Canvas className='overflow-y-scroll'>
             <Nav />
             <Content>
                 <RelicPreview localFile={previewImage}>
