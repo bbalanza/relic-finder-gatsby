@@ -12,6 +12,7 @@ const Scanner = (props: ScannerProps) => {
     }
 
     useEffect(() => {
+        /*TODO: Test */
         const html5QrCode = new Html5Qrcode("reader", scannerDebugConfig);
         const qrCodeSuccessCallback: QrcodeSuccessCallback = async (decodedText) => {
             await html5QrCode.stop()
@@ -29,7 +30,11 @@ const Scanner = (props: ScannerProps) => {
         const cameraConfig = { 
             facingMode: "environment"
         };
-        html5QrCode.start(cameraConfig, qrScannerConfig, qrCodeSuccessCallback, qrCodeErrorCallback);
+        html5QrCode.start(cameraConfig, qrScannerConfig, qrCodeSuccessCallback, qrCodeErrorCallback).catch(() => {
+            /* TODO: Test */
+            const alertMessage = "Please reload the page and allow access to the camera to use the QR Scanner.";
+            alert(alertMessage);
+        });
     }, []);
 
     return <div id={'reader'} className={`${props.className}`}/>;
