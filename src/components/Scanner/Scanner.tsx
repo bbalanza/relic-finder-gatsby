@@ -15,19 +15,25 @@ const Scanner = (props: ScannerProps) => {
         /*TODO: Test */
         const html5QrCode = new Html5Qrcode("reader", scannerDebugConfig);
         const qrCodeSuccessCallback: QrcodeSuccessCallback = async (decodedText) => {
-            await html5QrCode.stop()
-            navigate(Helpers.getRelicID(decodedText))
+            try {
+                const result = Helpers.getRelicID(decodedText);
+                await html5QrCode.stop()
+                navigate(result)
+            }
+            catch (error) {
+                if(error instanceof Error)
+                    alert(error.message)
+            }
         };
         const qrCodeErrorCallback: QrcodeErrorCallback = (errorMessage, error) => {
-            console.log(error)
         }
-        const qrScannerConfig: Html5QrcodeCameraScanConfig = { 
-            fps: 10, 
-            aspectRatio: Helpers.getCameraRatio(window.screen.width, window.screen.height), 
+        const qrScannerConfig: Html5QrcodeCameraScanConfig = {
+            fps: 10,
+            aspectRatio: Helpers.getCameraRatio(window.screen.width, window.screen.height),
             qrbox: 250,
             disableFlip: true,
-         };
-        const cameraConfig = { 
+        };
+        const cameraConfig = {
             facingMode: "environment"
         };
         html5QrCode.start(cameraConfig, qrScannerConfig, qrCodeSuccessCallback, qrCodeErrorCallback).catch(() => {
@@ -37,7 +43,7 @@ const Scanner = (props: ScannerProps) => {
         });
     }, []);
 
-    return <div id={'reader'} className={`${props.className}`}/>;
+    return <div id={'reader'} className={`${props.className}`} />;
 }
 
 export default Scanner;
