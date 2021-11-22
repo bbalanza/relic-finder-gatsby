@@ -23,7 +23,9 @@ const Scanner = (props: ScannerProps) => {
         const qrScannerConfig: Html5QrcodeCameraScanConfig = { 
             fps: 10, 
             aspectRatio: Helpers.getCameraRatio(window.screen.width, window.screen.height), 
-            qrbox: 250 };
+            qrbox: 250,
+            disableFlip: true,
+         };
         const cameraConfig = { 
             facingMode: "environment"
         };
