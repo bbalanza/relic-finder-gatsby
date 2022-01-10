@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import ReactMarkdown from 'react-markdown'
-import { Nav, Content, RelicPreview, Button, Player, Canvas } from '../components/'
+import { Nav, Content, RelicPreview, Button, Player} from '../components/'
 
 const Relic = ({ data }: any) => {
     const relic = data.strapiRelics;
@@ -11,7 +11,7 @@ const Relic = ({ data }: any) => {
         <Nav />
         <Content>
             <RelicPreview localFile={previewImage}>
-                <h2>{relic.name}</h2>
+                <h1>{relic.name}</h1>
             </RelicPreview>
             <ReactMarkdown children={relic.description} />
             <Player audioUrl={audio} />
