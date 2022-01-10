@@ -43,7 +43,7 @@ const Scanner = (props: ScannerProps) => {
         });
     }, []);
 
-    return <div id={'reader'} className={`${props.className}`} />;
+    return <div id={'reader'} className={`${props.className ?? ''} `} />;
 }
 
 export default Scanner;

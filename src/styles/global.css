@@ -20,16 +20,13 @@
   }
 
   body {
-    @apply text-base font-sans text-gray-200 bg-black md:text-base;
+    @apply text-base font-sans text-gray-200 bg-black md:text-base h-screen;
   }
 }
 
 @layer components {
-  .canvas {
-    @apply h-screen;
-  }
   .content {
-    @apply h-full container gap-y-5 flex flex-col justify-start items-stretch;
+    @apply h-1/2 container gap-y-10 flex flex-col justify-between items-center;
   }
   .nav-bar-gradient {
     @apply bg-gradient-to-r from-accent-100 via-accent-200 to-accent-300;
