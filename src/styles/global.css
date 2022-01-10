@@ -29,7 +29,7 @@
     @apply h-screen;
   }
   .content {
-    @apply h-full container gap-y-5 flex flex-col justify-start items-stretch;
+    @apply h-full container gap-y-5 flex flex-col justify-start items-center;
   }
   .nav-bar-gradient {
     @apply bg-gradient-to-r from-accent-100 via-accent-200 to-accent-300;
