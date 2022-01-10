@@ -7,19 +7,17 @@ const Relic = ({ data }: any) => {
     const relic = data.strapiRelics;
     const previewImage = relic.images.localFile;
     const audio = relic.audio_description.localFile.url;
-    return (
-        <Canvas>
-            <Nav />
-            <Content>
-                <RelicPreview localFile={previewImage}>
-                    <h2>{relic.name}</h2>
-                </RelicPreview>
-                <ReactMarkdown children={relic.description} />
-                <Player audioUrl={audio} />
-                <Button className="text-center mt-5 mb-10 " to="/" >Return to QR Scanner</Button>
-            </Content>
-        </Canvas>
-    )
+    return <div className='h-screen'>
+        <Nav />
+        <Content>
+            <RelicPreview localFile={previewImage}>
+                <h2>{relic.name}</h2>
+            </RelicPreview>
+            <ReactMarkdown children={relic.description} />
+            <Player audioUrl={audio} />
+            <Button className="text-center mt-5 mb-10 " to="/" >Return to QR Scanner</Button>
+        </Content>
+    </div>
 }
 
 export const query = graphql`
