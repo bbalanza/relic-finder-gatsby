@@ -1,4 +1,4 @@
-image: docker:latest
+image: alpine-node:14
 
 # include:
 #   - template: Secret-Detection.gitlab-ci.yml
@@ -10,7 +10,6 @@ stages:
 
 deploy:
   stage: deploy
-  image: alpine-node
   before_script:
     - npm i -g firebase-tools
   environment:
