@@ -10,14 +10,16 @@ stages:
 
 deploy:
   stage: deploy
-  image: mhart/alpine-node:14
+  image: node:14-stretch
   before_script:
     - npm i -g firebase-tools
   environment:
     name: $_ENV
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - .yarn/
   script:
-    - echo "Installing Yarn"
-    - npm install -g yarn
     - yarn set version berry
     - yarn install
     - yarn build
