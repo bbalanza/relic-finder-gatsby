@@ -11,14 +11,14 @@ stages:
 deploy:
   stage: deploy
   image: node:14-stretch
-  before_script:
-    - npm i -g firebase-tools
-  environment:
-    name: $_ENV
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
       - .yarn/
+  before_script:
+    - npm i -g firebase-tools
+  environment:
+    name: $_ENV
   script:
     - yarn set version berry
     - yarn install
