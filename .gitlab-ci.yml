@@ -8,9 +8,9 @@ stages:
   # - test
   - deploy
 
-deploy-staging:
+deploy:
   stage: deploy
-  image: node:14
+  image: 14-alpine
   before_script:
     - npm i -g firebase-tools
   environment:
