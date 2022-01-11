@@ -63,7 +63,11 @@ public
 
 # Yarn
 .yarn/*
-.yarnrc.yml
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
 .pnp.*
 yarn-error.log
 # Yarn Integrity file
