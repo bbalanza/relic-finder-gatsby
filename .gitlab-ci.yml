@@ -17,7 +17,7 @@ deploy:
     name: $_ENV
   script:
     - echo "Installing Yarn"
-    - npm install yarn
+    - npm install -g yarn
     - yarn set version berry
     - yarn install
     - yarn build
