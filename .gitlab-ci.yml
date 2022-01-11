@@ -10,7 +10,7 @@ stages:
 
 deploy:
   stage: deploy
-  image: 14-alpine
+  image: alpine-node:14
   before_script:
     - npm i -g firebase-tools
   environment:
