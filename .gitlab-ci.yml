@@ -17,7 +17,8 @@ deploy:
     name: $_ENV
   script:
     - echo "Installing Yarn"
-    - npm install -g yarn@berry
+    - npm install -g yarn
+    - yarn set version berry
     - yarn install
     - yarn build
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
