@@ -14,6 +14,9 @@ const Scanner = (props: ScannerProps) => {
     useEffect(() => {
         /*TODO: Test */
         const html5QrCode = new Html5Qrcode("reader", scannerDebugConfig);
+        const widthRatio = 16;
+        const heightRatio = 9;
+        const screenPercentage = .76;
         const qrCodeSuccessCallback: QrcodeSuccessCallback = async (decodedText) => {
             try {
                 const result = Helpers.getRelicID(decodedText);
@@ -29,7 +32,7 @@ const Scanner = (props: ScannerProps) => {
         }
         const qrScannerConfig: Html5QrcodeCameraScanConfig = {
             fps: 10,
-            aspectRatio: Helpers.getCameraRatio(window.screen.width, window.screen.height),
+            aspectRatio: Helpers.getCameraRatio(widthRatio, heightRatio, screenPercentage),
             qrbox: 250,
             disableFlip: true,
         };
