@@ -13,7 +13,7 @@ const Relic = ({ data }: any) => {
             <RelicPreview localFile={previewImage}>
                 <h1>{relic.name}</h1>
             </RelicPreview>
-            <ReactMarkdown className='max-w-lg' children={relic.description} />
+            <ReactMarkdown className='max-w-4xl' children={relic.description} />
             <Player audioUrl={audio} />
             <Button className="text-center mt-5 mb-10 " to="/" >Return to QR Scanner</Button>
         </Content>
