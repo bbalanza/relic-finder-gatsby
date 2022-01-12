@@ -1,7 +1,6 @@
 import { screen, render } from '@testing-library/react'
 import { RelicPreview } from '.'
 import React from 'react'
-import {getImage, GatsbyImage, ImageDataLike} from "gatsby-plugin-image"
 
 // Credit to https://bradgarropy.com/blog/mocking-gatsby-image for this amazing mock
 jest.mock('gatsby-plugin-image', () => {

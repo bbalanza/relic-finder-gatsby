@@ -4,7 +4,7 @@ import React from 'react'
 
 describe('Test Scanner component', () => {
     it('Renders the QR Scanner component.', () => {
-        window.alert = (msg: string) => {}
+        window.alert = (msg: string) => null
         render(<Scanner data-testid="scanner"/>)
         expect(screen.getByTestId('scanner').id).toBe('reader');
     })
