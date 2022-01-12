@@ -19,6 +19,7 @@ build:
     - yarn install
     - yarn build
   artifacts:
+    paths:
     - .yarn
     - /node_modules
   cache:
