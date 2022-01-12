@@ -1,3 +1,3 @@
 type Player = {
-    audioUrl: string
+    src: string
 } & React.HtmlHTMLAttributes<HTMLDivElement>

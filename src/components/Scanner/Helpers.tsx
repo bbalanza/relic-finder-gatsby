@@ -1,5 +1,5 @@
 /* TODO: Test!!! */
-const stripUrlParams = (decodedText: string): string => {
+const getRelicID = (decodedText: string): string => {
     const slugRegEx = new RegExp(/\/{1}[0-9 A-F]{4}/, 'g')
     const urlRegEx = new RegExp(/^http(|s):\/\/relic-finder.gelmanmuseum.org\/{1}/, 'g')
     let slugMatch = slugRegEx.exec(decodedText)?.toString() ?? '';
@@ -9,10 +9,8 @@ const stripUrlParams = (decodedText: string): string => {
     return slugMatch;
 }
 
-const getRelicID = (url: string): string => stripUrlParams(url)
-
-const getCameraRatio = (screenWidth: number, screenHeight: number): number => {
-    return (16 / 9) * .76;
+const getCameraRatio = (widthRatio: number, heightRatio: number, screenPercentage: number): number => {
+    return (widthRatio / heightRatio) * screenPercentage;
 }
 
-export default { stripUrlParams, getRelicID, getCameraRatio };
+export default { getRelicID, getCameraRatio };

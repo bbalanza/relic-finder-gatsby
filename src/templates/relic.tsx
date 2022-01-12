@@ -1,25 +1,27 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import ReactMarkdown from 'react-markdown'
-import { Nav, Content, RelicPreview, Button, Player, Canvas } from '../components/'
+import { Nav, Content, RelicPreview, GradientButton, Player } from '../components/'
 
 const Relic = ({ data }: any) => {
     const relic = data.strapiRelics;
     const previewImage = relic.images.localFile;
     const audio = relic.audio_description.localFile.url;
-    return (
-        <Canvas className='overflow-y-scroll'>
-            <Nav />
-            <Content>
-                <RelicPreview localFile={previewImage}>
-                    <h2>{relic.name}</h2>
-                </RelicPreview>
-                <ReactMarkdown children={relic.description} />
-                <Player audioUrl={audio} />
-                <Button className="text-center mt-5 mb-10 " to="/" >Return to QR Scanner</Button>
-            </Content>
-        </Canvas>
-    )
+    return <div className='h-screen'>
+        <Nav />
+        <Content>
+            <RelicPreview localFile={previewImage}>
+                <h1>{relic.name}</h1>
+            </RelicPreview>
+            <Player src={audio} />
+            <ReactMarkdown className='max-w-4xl' children={relic.description} />
+            <GradientButton onClick={() => navigate('/')}>
+                <h4>
+                    Return to QR Scanner
+                </h4>
+            </GradientButton>
+        </Content>
+    </div>
 }
 
 export const query = graphql`
