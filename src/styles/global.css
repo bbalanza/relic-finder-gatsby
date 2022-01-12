@@ -20,7 +20,7 @@
   }
 
   body {
-    @apply text-base font-sans text-gray-200 bg-black md:text-base h-screen overflow-y-hidden lg:overflow-y-auto;
+    @apply text-base font-sans text-gray-200 bg-black md:text-base h-screen;
   }
 }
 
