@@ -9,19 +9,33 @@ stages:
   - test
   - deploy
 
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      variables:
+        _ENV: production
+        _FIREBASE_DEPLOYMENT: deploy --only hosting
+    - if: $CI_COMMIT_BRANCH == "staging"
+      variables:
+        _ENV: staging
+        _FIREBASE_DEPLOYMENT: hosting:channel:deploy $CI_ENVIRONMENT_NAME
+
 build:
   stage: build
+  environment:
+    name: $_ENV
   before_script:
     - npm i -g firebase-tools
   script:
     - echo 'Installing dependencies:'
     - yarn set version berry
     - yarn install
+    - yarn build
   artifacts:
     paths:
-    - .yarn/
-    - node_modules/
-    - yarn.lock
+      - .yarn/
+      - node_modules/
+      - yarn.lock
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
@@ -40,14 +54,4 @@ deploy:
     name: $_ENV
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
-    - yarn build
     - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-      variables:
-        _ENV: production
-        _FIREBASE_DEPLOYMENT: deploy --only hosting
-    - if: $CI_COMMIT_BRANCH == "staging"
-      variables:
-        _ENV: staging
-        _FIREBASE_DEPLOYMENT: hosting:channel:deploy $CI_ENVIRONMENT_NAME
