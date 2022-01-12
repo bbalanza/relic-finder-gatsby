@@ -7,10 +7,11 @@ const Player = (props: Player): ReactElement => {
         >
             <audio
                 controls
-                src={props.audioUrl}
+                title='audio-player'
+                src={props.src}
             >
                 Your browser does not support the
-                <code>audio</code> element.
+                audio element.
             </audio>
         </div>
 }
