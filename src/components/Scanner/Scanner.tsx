@@ -10,31 +10,33 @@ const Scanner = (props: ScannerProps) => {
     const scannerDebugConfig: Html5QrcodeFullConfig = {
         verbose: false,
     }
-
+    const WidthRatio = 16;
+    const HeightRatio = 9;
+    const ScreenPercentage = .76;
     useEffect(() => {
         /*TODO: Test */
         const html5QrCode = new Html5Qrcode("reader", scannerDebugConfig);
-        const widthRatio = 16;
-        const heightRatio = 9;
-        const screenPercentage = .76;
+
         const qrCodeSuccessCallback: QrcodeSuccessCallback = async (decodedText) => {
             try {
                 const result = Helpers.getRelicID(decodedText);
                 await html5QrCode.stop()
                 navigate(result)
             }
-            catch (error) {
-                if(error instanceof Error)
-                    alert(error.message)
+            catch (error: any) {
+                alert(error.message)
             }
         };
-        const qrCodeErrorCallback: QrcodeErrorCallback = (errorMessage, error) => {
-        }
+        /* The HTML5 scanner requires an error callback for when a scan is unsuccessful. Given that the 
+        // scanner makes one scan per frame, it is always reporting failing scans. It is better to
+        // ignore these, hence the function returning undefined.
+        */
+        const qrCodeErrorCallback: QrcodeErrorCallback = (errorMessage, error) => {};
         const qrScannerConfig: Html5QrcodeCameraScanConfig = {
             fps: 10,
-            aspectRatio: Helpers.getCameraRatio(widthRatio, heightRatio, screenPercentage),
+            aspectRatio: Helpers.getCameraRatio(WidthRatio, HeightRatio, ScreenPercentage),
             qrbox: 250,
-            disableFlip: true,
+            disableFlip: false,
         };
         const cameraConfig = {
             facingMode: "environment"
@@ -46,7 +48,7 @@ const Scanner = (props: ScannerProps) => {
         });
     }, []);
 
-    return <div id={'reader'} className={`${props.className ?? ''} `} />;
+    return <div id={'reader'} {...props} className={`${props.className ?? ''} `} />;
 }
 
 export default Scanner;
