@@ -14,7 +14,6 @@ const Scanner = (props: ScannerProps) => {
     const HeightRatio = 9;
     const ScreenPercentage = .76;
     useEffect(() => {
-        /*TODO: Test */
         const html5QrCode = new Html5Qrcode("reader", scannerDebugConfig);
 
         const qrCodeSuccessCallback: QrcodeSuccessCallback = async (decodedText) => {
@@ -31,7 +30,7 @@ const Scanner = (props: ScannerProps) => {
         // scanner makes one scan per frame, it is always reporting failing scans. It is better to
         // ignore these, hence the function returning undefined.
         */
-        const qrCodeErrorCallback: QrcodeErrorCallback = (errorMessage, error) => {};
+        const qrCodeErrorCallback: QrcodeErrorCallback = (errorMessage, error) => null
         const qrScannerConfig: Html5QrcodeCameraScanConfig = {
             fps: 10,
             aspectRatio: Helpers.getCameraRatio(WidthRatio, HeightRatio, ScreenPercentage),

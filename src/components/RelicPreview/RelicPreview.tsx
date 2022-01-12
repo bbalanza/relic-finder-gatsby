@@ -1,6 +1,5 @@
 import React from "react";
-import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
-import Relic from "../../templates/relic";
+import { GatsbyImage, getImage} from "gatsby-plugin-image";
 
 const RelicPreview = (props: PreviewProps) => {
     const image = getImage(props.localFile);

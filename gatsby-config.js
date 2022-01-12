@@ -1,4 +1,4 @@
-getDevelopmentGatsbyOptions = env => {
+const getDevelopmentGatsbyOptions = env => {
   return env.CLOUD_DEV
     ? {
       apiURL: env.STRAPI_URL,
@@ -13,7 +13,7 @@ getDevelopmentGatsbyOptions = env => {
       collectionTypes: [`relics`, `categories`],
     }
 }
-getProductionGatsbyOptions = env => {
+const getProductionGatsbyOptions = env => {
   return {
     apiURL: env.STRAPI_URL,
     collectionTypes: [`relics`, `categories`],
