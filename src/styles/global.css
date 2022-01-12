@@ -22,6 +22,9 @@
   body {
     @apply text-base font-sans text-gray-200 bg-black md:text-base h-screen;
   }
+  audio::-webkit-media-controls-panel{
+    @apply bg-accent-400;
+  }
 }
 
 @layer components {

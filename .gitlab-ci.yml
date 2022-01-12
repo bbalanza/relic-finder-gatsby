@@ -1,30 +1,15 @@
-image: docker:latest
+image: node:14-stretch
 
 # include:
 #   - template: Secret-Detection.gitlab-ci.yml
 #   - template: Security/SAST.gitlab-ci.yml
 
 stages:
-  # - test
+  - build
+  - test
   - deploy
 
-deploy:
-  stage: deploy
-  image: node:14-stretch
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - .yarn/
-  before_script:
-    - npm i -g firebase-tools
-  environment:
-    name: $_ENV
-  script:
-    - yarn set version berry
-    - yarn install
-    - yarn build
-    - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
-    - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
+workflow:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       variables:
@@ -34,3 +19,39 @@ deploy:
       variables:
         _ENV: staging
         _FIREBASE_DEPLOYMENT: hosting:channel:deploy $CI_ENVIRONMENT_NAME
+
+build:
+  stage: build
+  environment:
+    name: $_ENV
+  script:
+    - echo 'Installing dependencies:'
+    - yarn set version berry
+    - yarn install
+    - yarn build
+  artifacts:
+    paths:
+      - .yarn
+      - node_modules/
+      - public/
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - .yarn/
+      - public/
+
+test:
+  stage: test
+  script:
+    - echo "Starting Test"
+    - yarn test
+
+deploy:
+  stage: deploy
+  environment:
+    name: $_ENV
+  before_script:
+    - npm i -g firebase-tools
+  script:
+    - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
+    - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
