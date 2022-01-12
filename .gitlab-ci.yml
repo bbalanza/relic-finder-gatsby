@@ -17,15 +17,16 @@ build:
     - echo 'Installing dependencies:'
     - yarn set version berry
     - yarn install
-    - yarn build
   artifacts:
     paths:
-    - .yarn
-    - /node_modules
+    - .yarn/
+    - node_modules/
+    - yarn.lock
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
       - .yarn/
+      - node_modules/
 
 test:
   stage: test
@@ -39,6 +40,7 @@ deploy:
     name: $_ENV
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
+    - yarn build
     - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
