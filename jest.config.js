@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env`,
+})
+
 module.exports = {
   transform: {
     "^.+\\.[jt]sx?$": "<rootDir>/jest-preprocess.js",
@@ -11,6 +15,9 @@ module.exports = {
   transformIgnorePatterns: [`node_modules/(?!(gatsby)/)`],
   globals: {
     __PATH_PREFIX__: ``,
+    SELENIUM_GRID_USERNAME: process.env.SELENIUM_GRID_USERNAME, 
+    SELENIUM_GRID_ACCESS_KEY: process.env.SELENIUM_GRID_ACCESS_KEY,
+    SELENIUM_GRID_URL: process.env.SELENIUM_GRID_URL,
   },
   testURL: `http://localhost`,
   setupFiles: [`<rootDir>/loadershim.js`],
