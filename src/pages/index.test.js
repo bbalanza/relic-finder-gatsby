@@ -8,12 +8,13 @@ const gridUrl = SELENIUM_GRID_URL;
 
 const capabilities = {
   "browserName": "Chromium",
-  "osVersion": "11.0",
-  "deviceName": "Samsung Galaxy S21 Ultra",
+  "osVersion": "9.0",
+  "deviceName": "Samsung Galaxy S10e",
   "realMobile": "true",
+  "local": "false",
   "projectName": "Relic Finder Scanner",
-  "buildName": "Build 1",
   "sessionName": "Scanner Initialization",
+  "autoGrantPermissions": "true",
   'goog:chromeOptions': {
     'args': ["--use-fake-device-for-media-stream", "--use-fake-ui-for-media-stream"],
   }
@@ -39,13 +40,18 @@ const sleep = require('util').promisify(setTimeout)
 describe('Test the ', () => {
   let driver;
   beforeAll(async () => {
-    driver = new webdriver.Builder()
-      .usingServer(
-        'http://' + username + ':' + accessKey + '@' + gridUrl
-      )
-      .withCapabilities(capabilities)
-      .build();
-    await driver.get('https://relic-finder-pilot--staging-y6sy1jhz.web.app/');
+    try {
+      driver = new webdriver.Builder()
+        .usingServer(
+          'http://' + username + ':' + accessKey + '@' + gridUrl
+        )
+        .withCapabilities(capabilities)
+        .build();
+      await driver.get('https://relic-finder-pilot--staging-y6sy1jhz.web.app/');
+    } catch(e){
+      driver.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Test failed: scanner was not rendered on-screen."}}');
+      throw e.message
+    }
   }, 30000);
 
   afterAll(async () => {
