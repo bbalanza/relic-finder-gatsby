@@ -7,12 +7,16 @@ const accessKey = SELENIUM_GRID_ACCESS_KEY;
 const gridUrl = SELENIUM_GRID_URL;
 
 const capabilities = {
-  'browserName': 'chrome',
-  'browser_version': 'latest-beta',
-  'os': 'Windows',
-  'os_version': '10',
-  'build': 'browserstack-build-1',
-  'name': 'Parallel test 1'
+  "browserName": "Chromium",
+  "osVersion": "11.0",
+  "deviceName": "Samsung Galaxy S21 Ultra",
+  "realMobile": "true",
+  "projectName": "Relic Finder Scanner",
+  "buildName": "Build 1",
+  "sessionName": "Scanner Initialization",
+  'goog:chromeOptions': {
+    'args': ["--use-fake-device-for-media-stream", "--use-fake-ui-for-media-stream"],
+  }
 };
 
 const getElementById = async (driver, id, timeout = 2000) => {
@@ -30,17 +34,18 @@ const getElementByXpath = async (driver, xpath, timeout = 2000) => {
   return await driver.wait(until.elementIsVisible(el), timeout);
 };
 
-describe('webdriver', () => {
+const sleep = require('util').promisify(setTimeout)
+
+describe('Test the ', () => {
   let driver;
   beforeAll(async () => {
-    console.log('http://' + username + ':' + accessKey + '@' + gridUrl)
     driver = new webdriver.Builder()
       .usingServer(
         'http://' + username + ':' + accessKey + '@' + gridUrl
       )
       .withCapabilities(capabilities)
       .build();
-    await driver.get('http://www.google.com');
+    await driver.get('https://relic-finder-pilot--staging-y6sy1jhz.web.app/');
   }, 30000);
 
   afterAll(async () => {
@@ -48,12 +53,12 @@ describe('webdriver', () => {
   }, 40000);
 
   test('test', async () => {
-   const inputField = await driver.findElement(webdriver.By.name("q"));
-    await inputField.sendKeys("BrowserStack", webdriver.Key.ENTER); // this works on desktop browsers
     try {
-      await driver.wait(webdriver.until.titleMatches(/BrowserStack/i), 5000);
+      const scanner = await getElementById(driver, 'reader', 4000);
+      driver.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test passed: scanner was rendered on-screen."}}');
     } catch (e) {
-      await inputField.submit(); // this takes care of submit in mobile browsers
-    } 
+      driver.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "Test failed: scanner was not rendered on-screen."}}');
+      throw e.message
+    }
   }, 35000);
 });
