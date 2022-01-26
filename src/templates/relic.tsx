@@ -11,7 +11,7 @@ const Relic = ({ data }: any) => {
         <Nav />
         <Content>
             <RelicPreview localFile={previewImage}>
-                <h1>{relic.name}</h1>
+                <h2>{relic.name}</h2>
             </RelicPreview>
             <Player src={audio} />
             <ReactMarkdown className='max-w-4xl' children={relic.description} />
