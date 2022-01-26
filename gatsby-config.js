@@ -43,7 +43,7 @@ module.exports = {
         ...(process.env.NODE_ENV === "development"
           ? getDevelopmentGatsbyOptions(process.env)
           : getProductionGatsbyOptions(process.env)),
-        queryLimit: 15000, // Default to 100
+        queryLimit: 3000, 
       },
     },
     {
