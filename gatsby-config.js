@@ -1,12 +1,9 @@
 const setupStrapiTypes = () => ({
-  collectionTypes: [`relics`, `qr_codes`],
+  collectionTypes: [`Relic`],
 });
 
-const setupStrapiCredentials = (identifier, password) => ({
-  loginData: {
-    identifier: identifier,
-    password: password,
-  },
+const setupStrapiCredentials = (token) => ({
+  // token: token
 });
 
 const getDevelopmentGatsbyOptions = env => {
@@ -14,7 +11,7 @@ const getDevelopmentGatsbyOptions = env => {
     ? {
       apiURL: env.STRAPI_URL,
       ...(setupStrapiTypes()),
-      ...(setupStrapiCredentials(env.STRAPI_USERNAME, env.STRAPI_PASSWORD)),
+      ...(setupStrapiCredentials(env.STRAPI_TOKEN)),
     }
     : {
       apiURL: `http://localhost:1337`,
@@ -25,17 +22,17 @@ const getProductionGatsbyOptions = env => {
   return {
     apiURL: env.STRAPI_URL,
     ...(setupStrapiTypes()),
-    ...(setupStrapiCredentials(env.STRAPI_USERNAME, env.STRAPI_PASSWORD)),
+    ...(setupStrapiCredentials(env.STRAPI_TOKEN)),
   }
 };
 
-const getStrapiSourcePlugin = (env) => ({
+const getStrapiSourcePlugin = env => ({
   resolve: 'gatsby-source-strapi',
   options: {
     apiURL: env.STRAPI_URL,
     ...(process.env.NODE_ENV === "development"
-      ? getDevelopmentGatsbyOptions(process.env)
-      : getProductionGatsbyOptions(process.env)),
+      ? getDevelopmentGatsbyOptions(env)
+      : getProductionGatsbyOptions(env)),
     queryLimit: 1000, // Default to 100
     locale: 'en', // default to all
   },
@@ -54,7 +51,7 @@ module.exports = {
     "gatsby-plugin-image",
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
-    ...(getStrapiSourcePlugin(env)),
+    getStrapiSourcePlugin(process.env),
     {
       resolve: "gatsby-plugin-react-svg",
       options: {

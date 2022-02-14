@@ -4,8 +4,8 @@ import ReactMarkdown from 'react-markdown'
 import { Nav, Content, RelicPreview, GradientButton, Player } from '../components/'
 
 const Relic = ({ data }: any) => {
-    const relic = data.strapiRelics;
-    const previewImage = relic.images.localFile;
+    const relic = data.strapiRelic;
+    const previewImage = relic.image.localFile;
     const audio = relic.audio_description.localFile.url;
     return <div className='h-screen'>
         <Nav />
@@ -26,7 +26,7 @@ const Relic = ({ data }: any) => {
 
 export const query = graphql`
 query($id: String!) {
-    strapiRelics(id: {eq: $id}) {
+    strapiRelic(id: {eq: $id}) {
         name
         description
        images {

@@ -37,7 +37,7 @@ const getElementByXpath = async (driver, xpath, timeout = 2000) => {
 
 const sleep = require('util').promisify(setTimeout)
 
-describe('Test the ', () => {
+describe('Test the application in a staging environment:', () => {
   let driver;
   beforeAll(async () => {
     try {
@@ -58,7 +58,7 @@ describe('Test the ', () => {
     await driver.quit();
   }, 40000);
 
-  test('test', async () => {
+  test('Test the scanner is initialized.', async () => {
     try {
       const scanner = await getElementById(driver, 'reader', 4000);
       driver.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Test passed: scanner was rendered on-screen."}}');
