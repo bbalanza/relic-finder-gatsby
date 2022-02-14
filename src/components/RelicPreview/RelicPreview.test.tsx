@@ -14,4 +14,7 @@ describe('Test RelicPreview', () => {
         </RelicPreview>)
         expect(screen.getByTestId('testTarget').textContent).toBe('This was rendered')
     })
+    // TODO: 
+    // Test displaying image but no name
+    // Test displaying name but no image
 })
