@@ -1,9 +1,9 @@
 const setupStrapiTypes = () => ({
-  collectionTypes: [`Relic`],
+  collectionTypes: [`Relic`, `QR Code`],
 });
 
 const setupStrapiCredentials = (token) => ({
-  // token: token
+  token: token
 });
 
 const getDevelopmentGatsbyOptions = env => {
