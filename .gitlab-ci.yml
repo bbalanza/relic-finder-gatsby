@@ -46,7 +46,8 @@ test:
     - echo "Starting Tests"
     - yarn test
   rules:
-    - if: $_ENV == production
+    - if: $_ENV == staging
+      when: never
 
 deploy:
   stage: deploy
