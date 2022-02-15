@@ -15,12 +15,12 @@ const Relic = ({ data }: any) => {
 
     return <div className='h-screen'>
         <Nav />
-        <Content>
+        <Content className='max-w-4xl'>
             <RelicPreview localFile={previewImage}>
                 <h2>{title}</h2>
             </RelicPreview>
             {audio ? (<Player src={audio} />) : null}
-            {description ? (<ReactMarkdown className='max-w-4xl' children={description} />) : null}
+            {description ? (<ReactMarkdown className='' children={description} />) : null}
             <GradientButton onClick={() => navigate('/')}>
                 <h4>
                     Return to QR Scanner
