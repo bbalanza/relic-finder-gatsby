@@ -48,8 +48,6 @@ test:
   script:
     - echo "Starting Tests"
     - yarn test
-  rules:
-    - if: $_ENV == "production"
 
 deploy:
   stage: deploy
