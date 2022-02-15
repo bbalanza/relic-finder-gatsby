@@ -1,4 +1,3 @@
-import jest from 'jest'
 import Helpers from './Helpers';
 
 describe('Test stripUrlParams', () => {

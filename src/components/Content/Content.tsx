@@ -1,8 +1,6 @@
 import React from "react";
 
-type ContentProps = {
-
-} & { children?: React.ReactNode} & React.HTMLAttributes<HTMLDivElement>
+type ContentProps = { children?: React.ReactNode} & React.HTMLAttributes<HTMLDivElement>
 
 const Content = (props: ContentProps) => {
     return (

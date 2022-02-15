@@ -1,12 +1,11 @@
 import React from "react";
-import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
-import Relic from "../../templates/relic";
+import { GatsbyImage, getImage} from "gatsby-plugin-image";
 
 const RelicPreview = (props: PreviewProps) => {
     const image = getImage(props.localFile);
     return (
         <>
-            <div className={`${props.className} grid`}>
+            <div className={`${props.className ?? ''} grid w-full`}>
                 <GatsbyImage
                     className="row-start-1 col-start-1"
                     image={image!}

@@ -1,28 +1,36 @@
-getDevelopmentGatsbyOptions = env => {
+const setupStrapiTypes = () => ({
+  collectionTypes: [`Relic`, `QR Code`],
+});
+
+const getDevelopmentGatsbyOptions = env => {
   return env.CLOUD_DEV
     ? {
       apiURL: env.STRAPI_URL,
-      collectionTypes: [`relics`, `categories`],
-      loginData: {
-        identifier: env.STRAPI_USERNAME,
-        password: env.STRAPI_PASSWORD,
-      }
+      ...(setupStrapiTypes()),
     }
     : {
       apiURL: `http://localhost:1337`,
-      collectionTypes: [`relics`, `categories`],
+      ...(setupStrapiTypes()),
     }
 }
-getProductionGatsbyOptions = env => {
+const getProductionGatsbyOptions = env => {
   return {
     apiURL: env.STRAPI_URL,
-    collectionTypes: [`relics`, `categories`],
-    loginData: {
-      identifier: env.STRAPI_USERNAME,
-      password: env.STRAPI_PASSWORD,
-    },
+    ...(setupStrapiTypes()),
   }
-}
+};
+
+const getStrapiSourcePlugin = env => ({
+  resolve: 'gatsby-source-strapi',
+  options: {
+    apiURL: env.STRAPI_URL,
+    ...(process.env.NODE_ENV === "development"
+      ? getDevelopmentGatsbyOptions(env)
+      : getProductionGatsbyOptions(env)),
+    queryLimit: 1000, // Default to 100
+    locale: 'en', // default to all
+  },
+})
 
 require("dotenv").config({
   path: `.env`,
@@ -37,15 +45,7 @@ module.exports = {
     "gatsby-plugin-image",
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
-    {
-      resolve: `gatsby-source-strapi`,
-      options: {
-        ...(process.env.NODE_ENV === "development"
-          ? getDevelopmentGatsbyOptions(process.env)
-          : getProductionGatsbyOptions(process.env)),
-        queryLimit: 1000, // Default to 100
-      },
-    },
+    getStrapiSourcePlugin(process.env),
     {
       resolve: "gatsby-plugin-react-svg",
       options: {
