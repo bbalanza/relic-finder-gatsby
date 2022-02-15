@@ -1,6 +1,7 @@
 const { assert } = require('console');
 
 const sleep = require('util').promisify(setTimeout)
+const URL = 'https://relic-finder-pilot--staging-g5x5qtyx.web.app'
 
 const acceptPermissions = async() => {
     await sleep(2000);
@@ -13,7 +14,7 @@ const acceptPermissions = async() => {
 
 describe("Test scanner ", () => {
     it("Renders", async () => {
-        await browser.url('https://relic-finder-pilot--staging-y6sy1jhz.web.app');
+        await browser.url(URL);
         await acceptPermissions();
         const reader = await $('//*[@id="reader"]/video')
         await sleep(3000)
