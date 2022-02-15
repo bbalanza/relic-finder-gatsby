@@ -38,6 +38,7 @@ build:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
       - .yarn/
+      - node_modules/
       - public/
 
 test:
@@ -46,8 +47,7 @@ test:
     - echo "Starting Tests"
     - yarn test
   rules:
-    - if: $_ENV == "staging"
-      when: never
+    - if: $_ENV == "production"
 
 deploy:
   stage: deploy
