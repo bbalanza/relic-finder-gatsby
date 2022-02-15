@@ -34,12 +34,12 @@ build:
       - .yarn
       - node_modules/
       - public/
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - .yarn/
-      - node_modules/
-      - public/
+  # cache:
+  #   key: ${CI_COMMIT_REF_SLUG}
+  #   paths:
+  #     - .yarn/
+  #     - node_modules/
+  #     - public/
 
 test:
   stage: test
