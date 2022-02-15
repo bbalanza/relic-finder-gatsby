@@ -1,8 +1,8 @@
 import { Blocks, findDescription, findSourceUrl } from './helpers'
 
-const BLOCKS: Blocks = [{ "Description": "Test" }, { "Src": { "url": "Test" } }]
+const BLOCKS: Blocks = [{ "Description": "Test" }, { "src": { "url": "Test" } }]
 const DESCRIPTION_BLOCK: Blocks = [{ "Description": "Test" }]
-const AUDIO_BLOCK: Blocks = [{ "Src": { "url": "Test" } }]
+const AUDIO_BLOCK: Blocks = [{ "src": { "url": "Test" } }]
 
 describe("Test findDescription", () => {
     it("Finds the Relic description if present in the Blocks array", () => {

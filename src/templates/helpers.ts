@@ -3,7 +3,7 @@ interface Description {
     Description: string;
 }
 interface AudioSource {
-    Src: {
+    src: {
         url: string
     }
 }
@@ -17,9 +17,9 @@ const findDescription = (blocks: Blocks): string | undefined => {
     return result;
 }
 const findSourceUrl = (blocks: Blocks): string | undefined => {
-    const result: AudioSource | undefined = blocks.find((element: Object) => Object.keys(element).includes("Src")) as AudioSource
+    const result: AudioSource | undefined = blocks.find((element: Object) => Object.keys(element).includes("src")) as AudioSource
     if (result)
-        return result.Src.url;
+        return result.src.url;
     return result;
 }
 

@@ -3,7 +3,7 @@ import { ReactElement } from "react-markdown/lib/react-markdown";
 
 const Player = (props: Player): ReactElement => {
     return <div
-            className={`${props.className ?? ''} flex-init self-center`}
+            className={`${props.className ?? ''} flex-grow self-center`}
         >
             <audio
                 controls

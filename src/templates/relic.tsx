@@ -13,15 +13,15 @@ const Relic = ({ data }: any) => {
     const description = findDescription(blocks);
     const audio = findSourceUrl(blocks);
 
-    return <div className='h-screen'>
-        <Nav />
-        <Content className='max-w-4xl'>
+    return <div className='h-screen flex justify-start flex-col'>
+        <Nav className='flex-initial' />
+        <Content className='max-w-4xl flex-initial'>
             <RelicPreview localFile={previewImage}>
                 <h2>{title}</h2>
             </RelicPreview>
-            {audio ? (<Player src={audio} />) : null}
+            {audio ? (<Player className={``} src={audio} />) : null}
             {description ? (<ReactMarkdown className='' children={description} />) : null}
-            <GradientButton onClick={() => navigate('/')}>
+            <GradientButton className={`mb-10`}onClick={() => navigate('/')}>
                 <h4>
                     Return to QR Scanner
                 </h4>
