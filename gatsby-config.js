@@ -2,16 +2,11 @@ const setupStrapiTypes = () => ({
   collectionTypes: [`Relic`, `QR Code`],
 });
 
-const setupStrapiCredentials = (token) => ({
-  token: token
-});
-
 const getDevelopmentGatsbyOptions = env => {
   return env.CLOUD_DEV
     ? {
       apiURL: env.STRAPI_URL,
       ...(setupStrapiTypes()),
-      ...(setupStrapiCredentials(env.STRAPI_TOKEN)),
     }
     : {
       apiURL: `http://localhost:1337`,
@@ -22,7 +17,6 @@ const getProductionGatsbyOptions = env => {
   return {
     apiURL: env.STRAPI_URL,
     ...(setupStrapiTypes()),
-    ...(setupStrapiCredentials(env.STRAPI_TOKEN)),
   }
 };
 
