@@ -12,7 +12,7 @@ const Scanner = (props: ScannerProps) => {
     }
     const WidthRatio = 16;
     const HeightRatio = 9;
-    const ScreenPercentage = .76;
+    const ScreenPercentage = .79;
     useEffect(() => {
         const html5QrCode = new Html5Qrcode("reader", scannerDebugConfig);
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql, navigate } from 'gatsby'
-import ReactMarkdown from 'react-markdown'
-import { Nav, Content, RelicPreview, GradientButton, Player } from '../components/'
+import { Nav, Content, RelicPreview, GradientButton, Player, TextDescription } from '../components/'
 import {Blocks, findDescription, findSourceUrl} from './helpers'
 
 const Relic = ({ data }: any) => {
@@ -20,7 +19,7 @@ const Relic = ({ data }: any) => {
                 <h2>{title}</h2>
             </RelicPreview>
             {audio ? (<Player className={``} src={audio} />) : null}
-            {description ? (<ReactMarkdown className='' children={description} />) : null}
+            {description ? (<TextDescription markdown={description}/>) : null}
             <GradientButton className={`mb-10`}onClick={() => navigate('/')}>
                 <h4>
                     Return to QR Scanner
