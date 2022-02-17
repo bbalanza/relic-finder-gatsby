@@ -1,4 +1,4 @@
-import React, { useState, useRef, LegacyRef } from "react"
+import React, { useState, useRef} from "react"
 import Helpers from './Helpers'
 import { MarkdownComponent, ReadMoreButton } from './Components'
 

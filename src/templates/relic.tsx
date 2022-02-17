@@ -46,7 +46,12 @@ query ($id: Int!) {
     Image {
       file {
         childImageSharp {
-          gatsbyImageData(layout: FULL_WIDTH)
+          gatsbyImageData(
+            layout: CONSTRAINED
+            formats: WEBP
+            quality: 90
+            webpOptions: {quality: 90}
+          )
         }
       }
     }

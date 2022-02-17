@@ -45,6 +45,15 @@ module.exports = {
     "gatsby-plugin-image",
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
+    {
+      resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
+      options: {
+        analyzerMode: "server",
+        analyzerPort: "8301",
+        analyzerHost: "0.0.0.0",
+        defaultSizes: "gzip"
+      },
+    },
     getStrapiSourcePlugin(process.env),
     {
       resolve: "gatsby-plugin-react-svg",
