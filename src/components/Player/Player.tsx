@@ -1,18 +1,15 @@
 import React from "react"
-import { ReactElement } from "react-markdown/lib/react-markdown";
+import ReactPlayer from "react-player";
 
-const Player = (props: Player): ReactElement => {
+const Player = (props: Player) => {
     return <div
-            className={`${props.className ?? ''} flex-grow self-center`}
+            className={`${props.className ?? ''} flex-grow self-center h-10 w-full`}
         >
-            <audio
-                controls
-                title='audio-player'
-                src={props.src}
-            >
-                Your browser does not support the
-                audio element.
-            </audio>
+            <ReactPlayer url={props.src} controls height='inherit' width='inherit' config={{
+                file: {
+                    forceAudio: true
+                }
+            }}/>
         </div>
 }
 
