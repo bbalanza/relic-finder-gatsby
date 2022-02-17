@@ -1,7 +1,0 @@
-export { GradientButton } from './GradientButton'
-export { Content } from './Content'
-export { Nav } from './Nav'
-export { Player } from './Player'
-export { RelicPreview } from './RelicPreview'
-export { Scanner } from './Scanner'
-export { TextDescription } from './TextDescription'
