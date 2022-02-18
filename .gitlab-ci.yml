@@ -28,6 +28,8 @@ build:
     - yarn build
   artifacts:
     paths:
+      - .yarn
+      - node_modules/
       - public/
       - .cache/
   cache:
