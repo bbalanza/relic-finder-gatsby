@@ -10,8 +10,8 @@ const URL = 'https://relic-finder-pilot--staging-g5x5qtyx.web.app'
 const sleep = require('util').promisify(setTimeout)
 
 exports.config = {
-  user: process.env.SELENIUM_GRID_USERNAME || 'brauliobalanza_1UiyJf',
-  key: process.env.SELENIUM_GRID_ACCESS_KEY || 'mSyFf1GTtqwyMcSznoyv',
+  user: process.env.SELENIUM_GRID_USERNAME,
+  key: process.env.SELENIUM_GRID_ACCESS_KEY,
 
   updateJob: false,
   specs: [

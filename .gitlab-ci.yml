@@ -5,6 +5,8 @@ image: node:16-alpine
 #   - template: Security/SAST.gitlab-ci.yml
 
 stages:
+  - install
+  - test
   - build
   - deploy
 
@@ -19,31 +21,54 @@ workflow:
         _ENV: staging
         _FIREBASE_DEPLOYMENT: hosting:channel:deploy $CI_ENVIRONMENT_NAME
 
-build:
-  stage: build
-  environment:
-    name: $_ENV
+install:
+  stage: install
+  environment: $_ENV
   script:
     - echo 'Installing dependencies:'
     - yarn set version berry
     - yarn install
-    - echo "Starting Tests"
-    - yarn test
-    - yarn build
-
   artifacts:
     paths:
-      - public/
-      - .cache/
       - .yarn
       - node_modules/
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
-      - public/
-      - .cache/
       - .yarn/
       - node_modules/
+
+unit-testing:
+  stage: test
+  environment: $_ENV
+  script:
+    - echo "Starting Unit Tests"
+    - yarn test
+
+e2e-testing:
+  stage: test
+  environment: $_ENV
+  script:
+    - echo "Starting e2e Tests"
+    - yarn e2e
+  rules:
+    - if: $_ENV == 'production'
+
+build:
+  stage: build
+  environment:
+    name: $_ENV
+  script:
+    - yarn build
+  artifacts:
+    paths:
+      - public/
+      - .cache/
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - public/
+      - .cache/
 
 deploy:
   stage: deploy
