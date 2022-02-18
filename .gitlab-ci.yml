@@ -6,7 +6,6 @@ image: node:16-alpine
 
 stages:
   - build
-  - test
   - deploy
 
 workflow:
@@ -28,7 +27,10 @@ build:
     - echo 'Installing dependencies:'
     - yarn set version berry
     - yarn install
+    - echo "Starting Tests"
+    - yarn test
     - yarn build
+
   artifacts:
     paths:
       - public/
@@ -42,12 +44,6 @@ build:
       - .cache/
       - .yarn/
       - node_modules/
-
-test:
-  stage: test
-  script:
-    - echo "Starting Tests"
-    - yarn test
 
 deploy:
   stage: deploy
