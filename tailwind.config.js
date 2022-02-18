@@ -1,7 +1,6 @@
 module.exports = {
   mode: 'jit',
-  purge: ['./src/**/*.{js,jsx,ts,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     container: {
       center: true,
@@ -15,6 +14,7 @@ module.exports = {
           100: '#00008B',
           200: '#2E8B57',
           300: '#FFD700',
+          400: '#FFFFF0',
         }
       }
     },

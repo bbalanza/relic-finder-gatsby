@@ -20,12 +20,21 @@
   }
 
   body {
-    @apply text-base font-sans md:text-base;
+    @apply text-base font-sans text-gray-200 bg-black md:text-base;
+  }
+  audio::-webkit-media-controls-panel{
+    @apply bg-accent-400;
   }
 }
 
 @layer components {
+  .content {
+    @apply container gap-y-5 flex flex-col justify-around items-center;
+  }
   .nav-bar-gradient {
-    @apply bg-gradient-to-r from-accent-100 via-accent-200 to-accent-300 h-4;
+    @apply bg-gradient-to-r from-accent-100 via-accent-200 to-accent-300;
+  }
+  .gradient-to-bg {
+    @apply bg-gradient-to-b from-transparent via-transparent to-black;
   }
 }

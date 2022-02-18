@@ -1,0 +1,1 @@
+type ScannerProps = React.HTMLAttributes<HTMLDivElement>
