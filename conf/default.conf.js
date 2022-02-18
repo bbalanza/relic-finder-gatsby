@@ -1,3 +1,14 @@
+const acceptPermissions = async() => {
+    await sleep(2000);
+    await browser.switchContext('NATIVE_APP')
+    const permissionButton = $(".//android.widget.Button[@text='Allow']")
+    permissionButton.click();
+    await sleep(2000)
+    await browser.switchContext('CHROMIUM')
+}
+const URL = 'https://relic-finder-pilot--staging-g5x5qtyx.web.app'
+const sleep = require('util').promisify(setTimeout)
+
 exports.config = {
   user: process.env.SELENIUM_GRID_USERNAME || 'brauliobalanza_1UiyJf',
   key: process.env.SELENIUM_GRID_ACCESS_KEY || 'mSyFf1GTtqwyMcSznoyv',
@@ -15,7 +26,16 @@ exports.config = {
     local: 'false',
     realMobile: 'true',
     name: 'single_test',
-    build: 'Mocha Testing'
+    build: 'WebdriverIO Testing'
+  },
+  {
+    browserName: 'Chromium',
+    osVersion: '9.0',
+    device: 'Samsung Galaxy S10e',
+    local: 'false',
+    realMobile: 'true',
+    name: 'single_test',
+    build: 'WebdriverIO Testing'
   }],
 
   logLevel: 'warn',
@@ -27,10 +47,12 @@ exports.config = {
   connectionRetryCount: 3,
   host: 'hub-cloud.browserstack.com',
 
-  before: function () {
-    var chai = require('chai');
-    global.expect = chai.expect;
-    chai.Should();
+  before: async function () {
+    require('expect-webdriverio');
+    global.wdioExpect = global.expect;
+
+    await browser.url(URL);
+    await acceptPermissions();
   },
   framework: 'mocha',
   mochaOpts: {
@@ -40,7 +62,7 @@ exports.config = {
 
   // Code to mark the status of test on BrowserStack based on the assertion status
   afterTest: function (test, context, { error, result, duration, passed, retries }) {
-    if(passed) {
+    if (passed) {
       browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed","reason": "Assertions passed"}}');
     } else {
       browser.executeScript('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "At least 1 assertion failed"}}');

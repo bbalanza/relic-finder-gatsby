@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@types/react": "^17.0.33",
+    "expect-webdriverio": "^3.1.4",
     "gatsby": "^4.7.2",
     "gatsby-cli": "^4.7.0",
     "gatsby-plugin-image": "^2.7.0",
