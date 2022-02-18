@@ -25,36 +25,29 @@ build:
   environment:
     name: $_ENV
   script:
+    - echo 'Installing dependencies:'
+    - yarn set version berry
+    - yarn install
     - yarn build
   artifacts:
     paths:
-      - .yarn
-      - node_modules/
       - public/
       - .cache/
+      - .yarn
+      - node_modules/
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
       - public/
       - .cache/
+      - .yarn/
+      - node_modules/
 
 test:
   stage: test
   script:
-    - echo 'Installing dependencies:'
-    - yarn set version berry
-    - yarn install
     - echo "Starting Tests"
     - yarn test
-  artifacts:
-    paths:
-      - .yarn
-      - node_modules/
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - .yarn/
-      - node_modules/
 
 deploy:
   stage: deploy
