@@ -6,7 +6,8 @@ image: node:16-alpine
 
 stages:
   - install
-  - test
+  - unit-testing
+  - e2e-testing
   - build
   - deploy
 
@@ -39,14 +40,14 @@ install:
       - node_modules/
 
 unit-testing:
-  stage: test
+  stage: unit-testing
   environment: $_ENV
   script:
     - echo "Starting Unit Tests"
     - yarn test
 
 e2e-testing:
-  stage: test
+  stage: e2e-testing
   environment: $_ENV
   script:
     - echo "Starting e2e Tests"
