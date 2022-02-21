@@ -24,15 +24,15 @@ workflow:
 
 .install_cache: 
   cache: &install_cache
-    - key: ${CI_COMMIT_REF_SLUG}-install
-      paths:
-        - .yarn/
-        - node_modules/
-      policy: pull
+    key: ${CI_COMMIT_REF_SLUG}-install
+    paths:
+      - .yarn/
+      - node_modules/
+    policy: pull
 
 .build_cache: 
   cache: &build_cache
-  - key: ${CI_COMMIT_REF_SLUG}-build
+    key: ${CI_COMMIT_REF_SLUG}-build
     paths:
       - public/
       - .cache/
@@ -84,9 +84,9 @@ build:
   script:
     - yarn build
   cache:
-    - <<: 
-    - *build_cache 
-    - *install_cache     
+    - <<: *build_cache 
+      policy: pull-push
+    - <<: *install_cache     
 
 deploy:
   stage: deploy
@@ -95,7 +95,7 @@ deploy:
   before_script:
     - npm i -g firebase-tools
   cache:
-    <<: *build_cache
+    - <<: *build_cache
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
     - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
