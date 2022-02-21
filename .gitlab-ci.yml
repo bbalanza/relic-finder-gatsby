@@ -78,6 +78,7 @@ build:
       paths:
         - .yarn/
         - node_modules/
+      policy: pull
 
 deploy:
   stage: deploy
