@@ -45,10 +45,6 @@ install:
     - echo 'Installing dependencies:'
     - yarn set version berry
     - yarn install
-  artifacts:
-    paths:
-      - .yarn/
-      - node_modules/
   cache:
     - <<: *install_cache
       policy: pull-push
