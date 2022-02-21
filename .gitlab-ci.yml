@@ -31,7 +31,10 @@ install:
     - yarn install
   artifacts:
     paths:
-      - .yarn
+      - node_modules/
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
       - node_modules/
   rules:
     - if: $STRAPI_UPDATE != "true"
