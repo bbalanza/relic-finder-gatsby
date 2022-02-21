@@ -70,10 +70,14 @@ build:
       - public/
       - .cache/
   cache:
-    key: ${CI_COMMIT_REF_SLUG}-build
-    paths:
-      - public/
-      - .cache/
+    - key: ${CI_COMMIT_REF_SLUG}-build
+      paths:
+        - public/
+        - .cache/
+    - key: ${CI_COMMIT_REF_SLUG}-install
+      paths:
+        - .yarn/
+        - node_modules/
 
 deploy:
   stage: deploy
