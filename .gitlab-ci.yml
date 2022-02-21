@@ -36,7 +36,8 @@ install:
   cache:
     key: $CI_COMMIT_BRANCH
     paths:
-      - .yarn/cache 
+      - .yarn/
+      - node_modules/
   rules:
     - if: $STRAPI_UPDATE != "true"
 
