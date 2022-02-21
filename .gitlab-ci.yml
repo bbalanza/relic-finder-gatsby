@@ -50,8 +50,8 @@ install:
       - .yarn/
       - node_modules/
   cache:
-    <<: *install_cache
-    policy: pull-push
+    - <<: *install_cache
+      policy: pull-push
   rules:
     - if: $STRAPI_UPDATE != "true"
 
@@ -62,7 +62,7 @@ unit-testing:
     - echo "Starting Unit Tests"
     - yarn test
   cache:
-    <<: *install_cache
+    - <<: *install_cache
   rules:
     - if: $STRAPI_UPDATE != "true"
 
@@ -73,7 +73,7 @@ e2e-testing:
     - echo "Starting e2e Tests"
     - yarn e2e
   cache:
-    <<: *install_cache
+    - <<: *install_cache
   rules:
     - if: $_ENV == 'production' && $STRAPI_UPDATE != "true"
 
@@ -84,10 +84,9 @@ build:
   script:
     - yarn build
   cache:
-    <<: 
-      - *build_cache 
-    policy: pull-push
-      - *install_cache     
+    - <<: 
+    - *build_cache 
+    - *install_cache     
 
 deploy:
   stage: deploy
