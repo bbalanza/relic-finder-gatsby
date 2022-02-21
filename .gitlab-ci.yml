@@ -42,7 +42,7 @@ workflow:
   cache: &firebase_tools_cache
     key: ${CI_COMMIT_REF_SLUG}-build
     paths:
-      - $(npm root -g)
+      - $NPM_ROOT_PATH
     policy: pull-push
 
 install:
@@ -100,6 +100,9 @@ deploy:
   cache:
     - <<: *build_cache
     - <<: *firebase_tools_cache
+  variables:
+    NPM_ROOT_PATH: ""
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
+    - NPM_ROOT_PATH=$(npm root -g)
     - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
