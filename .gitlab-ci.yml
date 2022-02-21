@@ -57,8 +57,7 @@ e2e-testing:
     - echo "Starting e2e Tests"
     - yarn e2e
   rules:
-    - if: $_ENV == 'production'
-    - if: $STRAPI_UPDATE != "true"
+    - if: $_ENV == 'production' && $STRAPI_UPDATE != "true"
 
 build:
   stage: build
