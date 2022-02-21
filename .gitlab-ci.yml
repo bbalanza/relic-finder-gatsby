@@ -39,7 +39,7 @@ install:
       - .yarn/
       - node_modules/
   rules:
-    - if: $STRAPI_UPDATE != true
+    - if: $STRAPI_UPDATE != "true"
 
 unit-testing:
   stage: unit-testing
@@ -48,7 +48,7 @@ unit-testing:
     - echo "Starting Unit Tests"
     - yarn test
   rules:
-    - if: $STRAPI_UPDATE != true
+    - if: $STRAPI_UPDATE != "true"
 
 e2e-testing:
   stage: e2e-testing
@@ -58,7 +58,7 @@ e2e-testing:
     - yarn e2e
   rules:
     - if: $_ENV == 'production'
-    - if: $STRAPI_UPDATE != true
+    - if: $STRAPI_UPDATE != "true"
 
 build:
   stage: build
