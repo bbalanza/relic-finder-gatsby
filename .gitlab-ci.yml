@@ -96,7 +96,7 @@ deploy:
   environment:
     name: $_ENV
   before_script:
-    - npm i -g firebase-tools
+    - npm i firebase-tools
   cache:
     - <<: *build_cache
     - <<: *firebase_tools_cache
