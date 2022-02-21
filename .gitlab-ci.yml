@@ -6,7 +6,8 @@ image: node:16-alpine
 
 stages:
   - install
-  - test
+  - unit-testing
+  - e2e-testing
   - build
   - deploy
 
@@ -37,22 +38,27 @@ install:
     paths:
       - .yarn/
       - node_modules/
+  rules:
+    - if: $STRAPI_UPDATE != "true"
 
 unit-testing:
-  stage: test
+  stage: unit-testing
   environment: $_ENV
   script:
     - echo "Starting Unit Tests"
     - yarn test
+  rules:
+    - if: $STRAPI_UPDATE != "true"
 
 e2e-testing:
-  stage: test
+  stage: e2e-testing
   environment: $_ENV
   script:
     - echo "Starting e2e Tests"
     - yarn e2e
   rules:
     - if: $_ENV == 'production'
+    - if: $STRAPI_UPDATE != "true"
 
 build:
   stage: build
