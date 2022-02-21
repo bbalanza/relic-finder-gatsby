@@ -79,8 +79,6 @@ deploy:
   stage: deploy
   environment:
     name: $_ENV
-  before_script:
-    - npm i -g firebase-tools
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
     - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
