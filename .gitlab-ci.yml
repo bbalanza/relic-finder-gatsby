@@ -22,6 +22,20 @@ workflow:
         _ENV: staging
         _FIREBASE_DEPLOYMENT: hosting:channel:deploy $CI_ENVIRONMENT_NAME
 
+.install_cache: &install_cache
+  - key: ${CI_COMMIT_REF_SLUG}-install
+    paths:
+      - .yarn/
+      - node_modules/
+    policy: pull
+
+.build_cache: &build_cache
+  - key: ${CI_COMMIT_REF_SLUG}-build
+    paths:
+      - public/
+      - .cache/
+    policy: pull
+
 install:
   stage: install
   environment: $_ENV
@@ -34,10 +48,8 @@ install:
       - .yarn/
       - node_modules/
   cache:
-    key: ${CI_COMMIT_REF_SLUG}-install
-    paths:
-      - .yarn/
-      - node_modules/
+    <<: *install_cache
+    policy: pull-push
   rules:
     - if: $STRAPI_UPDATE != "true"
 
@@ -47,6 +59,8 @@ unit-testing:
   script:
     - echo "Starting Unit Tests"
     - yarn test
+  cache:
+    <<: *install_cache
   rules:
     - if: $STRAPI_UPDATE != "true"
 
@@ -56,6 +70,8 @@ e2e-testing:
   script:
     - echo "Starting e2e Tests"
     - yarn e2e
+  cache:
+    <<: *install_cache
   rules:
     - if: $_ENV == 'production' && $STRAPI_UPDATE != "true"
 
@@ -65,20 +81,11 @@ build:
     name: $_ENV
   script:
     - yarn build
-  artifacts:
-    paths:
-      - public/
-      - .cache/
   cache:
-    - key: ${CI_COMMIT_REF_SLUG}-build
-      paths:
-        - public/
-        - .cache/
-    - key: ${CI_COMMIT_REF_SLUG}-install
-      paths:
-        - .yarn/
-        - node_modules/
-      policy: pull
+    <<: 
+      - *build_cache 
+    policy: pull-push
+      - *install_cache     
 
 deploy:
   stage: deploy
@@ -86,6 +93,8 @@ deploy:
     name: $_ENV
   before_script:
     - npm i -g firebase-tools
+  cache:
+    <<: *build_cache
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
     - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
