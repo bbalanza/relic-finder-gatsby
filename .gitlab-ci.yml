@@ -104,6 +104,6 @@ deploy:
     - <<: *build_cache
     - <<: *firebase_tools_cache
   script:
-    - curl -sL firebase.tools | bash
+    - wget firebase.tools -O /tmp/some_file && cat /tmp/some_file | bash
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
     - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
