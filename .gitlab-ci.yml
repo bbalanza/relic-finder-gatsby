@@ -22,14 +22,16 @@ workflow:
         _ENV: staging
         _FIREBASE_DEPLOYMENT: hosting:channel:deploy $CI_ENVIRONMENT_NAME
 
-.install_cache: &install_cache
-  - key: ${CI_COMMIT_REF_SLUG}-install
-    paths:
-      - .yarn/
-      - node_modules/
-    policy: pull
+.install_cache: 
+  cache: &install_cache
+    - key: ${CI_COMMIT_REF_SLUG}-install
+      paths:
+        - .yarn/
+        - node_modules/
+      policy: pull
 
-.build_cache: &build_cache
+.build_cache: 
+  cache: &build_cache
   - key: ${CI_COMMIT_REF_SLUG}-build
     paths:
       - public/
