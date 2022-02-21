@@ -34,7 +34,7 @@ install:
       - .yarn/
       - node_modules/
   cache:
-    key: $CI_COMMIT_BRANCH
+    key: ${CI_COMMIT_REF_SLUG}-install
     paths:
       - .yarn/
       - node_modules/
@@ -70,7 +70,7 @@ build:
       - public/
       - .cache/
   cache:
-    key: $CI_COMMIT_BRANCH
+    key: ${CI_COMMIT_REF_SLUG}-build
     paths:
       - public/
       - .cache/
