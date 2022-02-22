@@ -39,7 +39,7 @@ workflow:
   cache: &firebase_tools_cache
     key: ${CI_COMMIT_REF_SLUG}-build
     paths:
-      - /usr/local/lib/node_modules/firebase-tools/
+      - $CI_PROJECT_DIR/usr/local/lib/node_modules/firebase-tools/
     policy: pull-push
 
 install:
