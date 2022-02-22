@@ -105,6 +105,6 @@ deploy:
     - <<: *firebase_tools_cache
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
-    - ls /builds/
+    - ls /builds/braulio-balanza/
     - npm i -g firebase-tools
     - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
