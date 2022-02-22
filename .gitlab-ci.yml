@@ -107,5 +107,6 @@ deploy:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
     - ls /builds/braulio-balanza/relic-finder-gatsby.tmp
     - ls /
+    - ls /usr/
     - npm i -g firebase-tools
     - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
