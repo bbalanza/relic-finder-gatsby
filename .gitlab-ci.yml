@@ -35,6 +35,13 @@ workflow:
       - .cache/
     policy: pull
 
+.firebase_tools_cache:
+  cache: &firebase_tools_cache
+    key: ${CI_COMMIT_REF_SLUG}-build
+    paths:
+      - $CI_PROJECT_DIR/firebase
+    policy: pull-push
+
 install:
   stage: install
   environment: $_ENV
@@ -95,8 +102,12 @@ deploy:
     name: $_ENV
   cache:
     - <<: *build_cache
+    - <<: *firebase_tools_cache
   before_script:
     - npm i -g firebase-tools
+    - ln -s $CI_PROJECT_DIR/firebase $FIREBASE_PATH
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
     - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
+  variables:
+    FIREBASE_PATH: /usr/local/lib/node_modules/
