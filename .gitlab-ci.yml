@@ -105,10 +105,6 @@ deploy:
     - <<: *firebase_tools_cache
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
-    - ls /builds/braulio-balanza/relic-finder-gatsby/
-    - ls /builds/braulio-balanza/relic-finder-gatsby/usr/
-    - ls /builds/braulio-balanza/relic-finder-gatsby/usr/local/
-    - ls /builds/braulio-balanza/relic-finder-gatsby/usr/local/lib/
-    - ls /builds/braulio-balanza/relic-finder-gatsby/usr/local/lib/node_modules
+    - ls /builds/
     - npm i -g firebase-tools
     - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
