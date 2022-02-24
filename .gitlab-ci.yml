@@ -1,10 +1,8 @@
 image: node:16-alpine
 
-
 stages:
   - install
-  - unit-testing
-  - e2e-testing
+  - test
   - build
   - deploy
 
@@ -56,7 +54,7 @@ install:
     - if: $STRAPI_UPDATE != "true"
 
 unit-testing:
-  stage: unit-testing
+  stage: test
   environment: $_ENV
   script:
     - echo "Starting Unit Tests"
@@ -67,8 +65,17 @@ unit-testing:
   rules:
     - if: $STRAPI_UPDATE != "true"
 
-e2e-testing:
-  stage: e2e-testing
+security-testing:
+  stage: test
+  trigger:
+    include:
+      - local: .security-testing-ci.yml
+    strategy: depend
+  rules:
+    - if: $_ENV == 'production' && $STRAPI_UPDATE != "true"
+
+compatibility-testing:
+  stage: test
   environment: $_ENV
   script:
     - echo "Starting e2e Tests"
@@ -77,13 +84,11 @@ e2e-testing:
     - <<: *install_cache
   rules:
     - if: $_ENV == 'production' && $STRAPI_UPDATE != "true"
+
 include:
-  - local: Secret-Detection.gitlab-ci.yml
-    rules:
-      - if: $_ENV == 'production' && $STRAPI_UPDATE != "true"
-  - local: Security/SAST.gitlab-ci.yml
-    rules:
-      - if: $_ENV == 'production' && $STRAPI_UPDATE != "true"
+  - template: Security/Secret-Detection.gitlab-ci.yml 
+  - template: Security/SAST-IaC.latest.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
 
 build:
   stage: build
