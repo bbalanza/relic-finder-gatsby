@@ -152,7 +152,7 @@ fi
 
 # For info about why we place the binary at this location, see
 # https://unix.stackexchange.com/a/8658
-INSTALL_DIR="./firebase"
+INSTALL_DIR="./"
 
 # We need to ensure that the INSTALL_DIR exists.
 # On some platforms like the Windows Subsystem for Linux it may not.

@@ -39,7 +39,7 @@ workflow:
   cache: &firebase_tools_cache
     key: ${CI_COMMIT_REF_SLUG}-build
     paths:
-      - firebase/
+      - firebase
     policy: pull-push
 
 install:
@@ -107,8 +107,7 @@ deploy:
   before_script:
     - apt update
     - apt install curl -y
-    - export PATH=$PATH:firebase
     - cat ./firebase-tools-install.sh | bash
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
-    - ./firebase/firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
+    - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
