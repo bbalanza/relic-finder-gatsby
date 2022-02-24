@@ -53,6 +53,15 @@ install:
   rules:
     - if: $STRAPI_UPDATE != "true"
 
+security-testing:
+  stage: test
+  trigger:
+    include:
+      - local: .security-testing-ci.yml
+    strategy: depend
+  rules:
+    - if: $_ENV == 'production' && $STRAPI_UPDATE != "true"
+
 unit-testing:
   stage: test
   environment: $_ENV
@@ -64,15 +73,6 @@ unit-testing:
     - <<: *install_cache
   rules:
     - if: $STRAPI_UPDATE != "true"
-
-security-testing:
-  stage: test
-  trigger:
-    include:
-      - local: .security-testing-ci.yml
-    strategy: depend
-  rules:
-    - if: $_ENV == 'production' && $STRAPI_UPDATE != "true"
 
 compatibility-testing:
   stage: test
