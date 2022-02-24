@@ -37,9 +37,9 @@ workflow:
 
 .firebase_tools_cache:
   cache: &firebase_tools_cache
-    key: ${CI_COMMIT_REF_SLUG}-build
+    key: ${CI_COMMIT_REF_SLUG}-firebase-tools
     paths:
-      - firebase
+      - ./firebase
     policy: pull-push
 
 install:
