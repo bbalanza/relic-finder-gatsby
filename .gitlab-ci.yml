@@ -106,9 +106,10 @@ deploy:
   before_script:
     - apk --no-cache add curl
     - mkdir firebase
-    - \[\[ -f firebase/firebase \]\] ||  curl -Lo ./firebase/firebase https://firebase.tools/bin/linux/latest
-    - curl -z firebase/firebase -Lo ./firebase https://firebase.tools/bin/linux/latest
-    - chmod +x firebase/firebase
+    - \[\[ -f ./firebase/firebase \]\] ||  curl -Lo ./firebase/firebase https://firebase.tools/bin/linux/latest
+    - curl -z ./firebase/firebase -Lo ./firebase https://firebase.tools/bin/linux/latest
+    - chmod +x ./firebase/firebase
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
+    - ls firebase/
     - ./firebase/firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
