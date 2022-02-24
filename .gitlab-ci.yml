@@ -97,6 +97,7 @@ build:
     - <<: *install_cache     
 
 deploy:
+  image: debian:bullseye-slim
   stage: deploy
   environment:
     name: $_ENV
@@ -104,12 +105,10 @@ deploy:
     - <<: *build_cache
     - <<: *firebase_tools_cache
   before_script:
-    - apk --no-cache add curl
-    - mkdir firebase
-    - \[\[ -f ./firebase/firebase \]\] ||  curl -Lo ./firebase/firebase https://firebase.tools/bin/linux/latest
-    - curl -z ./firebase/firebase -Lo ./firebase https://firebase.tools/bin/linux/latest
-    - chmod +x ./firebase/firebase
+    - apt update
+    - apt install curl -y
+    - ls -l
+    - cat ./firebase-tools-install.sh | bash
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
-    - ls firebase/
-    - ./firebase/firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
+    - firebase/firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
