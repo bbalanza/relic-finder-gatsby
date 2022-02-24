@@ -107,6 +107,7 @@ deploy:
   before_script:
     - apt update
     - apt install curl -y
+    - PATH=$PATH:$CI_PROJECT_DIR
     - cat ./firebase-tools-install.sh | bash
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
