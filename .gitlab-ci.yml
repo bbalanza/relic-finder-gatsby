@@ -111,4 +111,4 @@ deploy:
     - chmod +x firebase/firebase
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
-    - firebase/firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
+    - ./firebase/firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
