@@ -11,7 +11,7 @@
     ],
     "rewrites": [
       {
-        "source": "/admin/**",
+        "source": "**",
         "run": {
           "serviceId": "strapi-production",
           "region": "us-central1"
