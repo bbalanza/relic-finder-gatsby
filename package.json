@@ -32,7 +32,8 @@
     "react-dom": "^17.0.2",
     "react-markdown": "^8.0.0",
     "react-player": "^2.9.0",
-    "tailwindcss": "^3.0.22"
+    "tailwindcss": "^3.0.22",
+    "yarn": "^1.22.17"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.11.1",
@@ -60,12 +61,11 @@
     "selenium-webdriver": "^4.1.1",
     "webdriverio": "^7.16.13"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
-  },
+  "repository": "https://gitlab.com/braulio-balanza/relic-finder-gatsby/",
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "yarn@3.2.0",
+  "main": "index.js",
+  "author": "Jose Braulio Balanza Martinez <braulio.balanza@gmail.com>"
 }

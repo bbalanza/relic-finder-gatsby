@@ -1,8 +1,5 @@
 image: node:16-alpine
 
-# include:
-#   - template: Secret-Detection.gitlab-ci.yml
-#   - template: Security/SAST.gitlab-ci.yml
 
 stages:
   - install
@@ -22,6 +19,29 @@ workflow:
         _ENV: staging
         _FIREBASE_DEPLOYMENT: hosting:channel:deploy $CI_ENVIRONMENT_NAME
 
+.install_cache: 
+  cache: &install_cache
+    key: ${CI_COMMIT_REF_SLUG}-install
+    paths:
+      - .yarn/
+      - node_modules/
+    policy: pull
+
+.build_cache: 
+  cache: &build_cache
+    key: ${CI_COMMIT_REF_SLUG}-build
+    paths:
+      - public/
+      - .cache/
+    policy: pull
+
+.firebase_tools_cache:
+  cache: &firebase_tools_cache
+    key: ${CI_COMMIT_REF_SLUG}-firebase-tools
+    paths:
+      - ./firebase
+    policy: pull-push
+
 install:
   stage: install
   environment: $_ENV
@@ -29,15 +49,9 @@ install:
     - echo 'Installing dependencies:'
     - yarn set version berry
     - yarn install
-  artifacts:
-    paths:
-      - .yarn
-      - node_modules/
   cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - .yarn/
-      - node_modules/
+    - <<: *install_cache
+      policy: pull-push
   rules:
     - if: $STRAPI_UPDATE != "true"
 
@@ -47,6 +61,9 @@ unit-testing:
   script:
     - echo "Starting Unit Tests"
     - yarn test
+
+  cache:
+    - <<: *install_cache
   rules:
     - if: $STRAPI_UPDATE != "true"
 
@@ -56,9 +73,17 @@ e2e-testing:
   script:
     - echo "Starting e2e Tests"
     - yarn e2e
+  cache:
+    - <<: *install_cache
   rules:
-    - if: $_ENV == 'production'
-    - if: $STRAPI_UPDATE != "true"
+    - if: $_ENV == 'production' && $STRAPI_UPDATE != "true"
+include:
+  - local: Secret-Detection.gitlab-ci.yml
+    rules:
+      - if: $_ENV == 'production' && $STRAPI_UPDATE != "true"
+  - local: Security/SAST.gitlab-ci.yml
+    rules:
+      - if: $_ENV == 'production' && $STRAPI_UPDATE != "true"
 
 build:
   stage: build
@@ -66,22 +91,24 @@ build:
     name: $_ENV
   script:
     - yarn build
-  artifacts:
-    paths:
-      - public/
-      - .cache/
   cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - public/
-      - .cache/
+    - <<: *build_cache 
+      policy: pull-push
+    - <<: *install_cache     
 
 deploy:
+  image: debian:bullseye-slim
   stage: deploy
   environment:
     name: $_ENV
+  cache:
+    - <<: *build_cache
+    - <<: *firebase_tools_cache
   before_script:
-    - npm i -g firebase-tools
+    - apt update
+    - apt install curl -y
+    - PATH=$PATH:$CI_PROJECT_DIR
+    - cat ./firebase-tools-install.sh | bash
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
     - firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
