@@ -65,7 +65,16 @@ unit-testing:
   rules:
     - if: $STRAPI_UPDATE != "true"
 
-production-testing:
+security-testing:
+  stage: test
+  trigger:
+    include:
+      - local: .security-testing-ci.yml
+    strategy: depend
+  rules:
+    - if: $_ENV == 'production' && $STRAPI_UPDATE != "true"
+
+compatibility-testing:
   stage: test
   environment: $_ENV
   script:
@@ -73,10 +82,6 @@ production-testing:
     - yarn e2e
   cache:
     - <<: *install_cache
-  trigger:
-    include:
-      - local: .security-testing-ci.yml
-    strategy: depend
   rules:
     - if: $_ENV == 'production' && $STRAPI_UPDATE != "true"
 
