@@ -107,9 +107,7 @@ deploy:
   before_script:
     - apt update
     - apt install curl -y
-    - \[\[ -f firebase \]\] ||  curl -Lo firebase https://firebase.tools/bin/linux/latest
-    - curl -z firebase -Lo firebase https://firebase.tools/bin/linux/latest
-    - chmod +x firebase
+    - cat ./firebase-tools-install.sh | bash
   script:
     - echo "Deploying to Firebase in $CI_ENVIRONMENT_NAME"
-    - ./firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
+    - ./firebase/firebase $_FIREBASE_DEPLOYMENT --token $FIREBASE_TOKEN
