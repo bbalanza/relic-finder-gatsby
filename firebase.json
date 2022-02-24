@@ -8,6 +8,15 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/admin",
+        "run": {
+          "serviceId": "strapi-production",
+          "region": "us-central1"
+        }
+      }
     ]
   },
   "storage": {
