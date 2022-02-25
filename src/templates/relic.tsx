@@ -7,6 +7,7 @@ import { GradientButton } from '../components/GradientButton'
 import { Player } from '../components/Player'
 import { TextDescription } from '../components/TextDescription'
 import { Blocks, findDescription, findSourceUrl } from './helpers'
+import { Head } from '../components/Head'
 
 const Relic = ({ data }: any) => {
 
@@ -17,21 +18,24 @@ const Relic = ({ data }: any) => {
   const description = findDescription(blocks);
   const audio = findSourceUrl(blocks);
 
-  return <div className='h-screen flex justify-start flex-col'>
-    <Nav className='flex-initial' />
-    <Content className='max-w-4xl flex-initial items-center'>
-      <RelicPreview localFile={previewImage}>
-        <h2>{title}</h2>
-      </RelicPreview>
-      {audio ? (<Player className={``} src={audio} />) : null}
-      {description ? (<TextDescription markdown={description} />) : null}
-      <GradientButton className={`mb-10`} onClick={() => navigate('/')}>
-        <h4>
-          Return to QR Scanner
-        </h4>
-      </GradientButton>
-    </Content>
-  </div>
+  return <>
+    <Head/>
+    <div className='h-screen flex justify-start flex-col'>
+      <Nav className='flex-initial' />
+      <Content className='max-w-4xl flex-initial items-center'>
+        <RelicPreview localFile={previewImage}>
+          <h2>{title}</h2>
+        </RelicPreview>
+        {audio ? (<Player className={``} src={audio} />) : null}
+        {description ? (<TextDescription markdown={description} />) : null}
+        <GradientButton className={`mb-10`} onClick={() => navigate('/')}>
+          <h4>
+            Return to QR Scanner
+          </h4>
+        </GradientButton>
+      </Content>
+    </div>
+  </>
 }
 
 export const query = graphql`

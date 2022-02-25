@@ -38,10 +38,8 @@ require("dotenv").config({
 
 getSharpOptions = () => ({
     resolve: "gatsby-plugin-sharp",
-    options:{
-      icon: "src/images/emblem.svg"
-    }
 })
+
 module.exports = {
   siteMetadata: {
     title: "Relic Finder"
@@ -50,6 +48,7 @@ module.exports = {
     "gatsby-plugin-postcss",
     "gatsby-plugin-image",
     "gatsby-transformer-sharp",
+    "gatsby-plugin-react-helmet",
     getSharpOptions(),
     getStrapiSourcePlugin(process.env),
     {
