@@ -1,13 +1,13 @@
 import React from 'react'
 import { graphql, navigate } from 'gatsby'
-import { Nav } from '../components/Nav'
-import { Content } from '../components/Content'
-import { RelicPreview } from '../components/RelicPreview'
-import { GradientButton } from '../components/GradientButton'
-import { Player } from '../components/Player'
-import { TextDescription } from '../components/TextDescription'
+import { Nav } from '../../components/Nav'
+import { Content } from '../../components/Content'
+import { RelicPreview } from '../../components/RelicPreview'
+import { GradientButton } from '../../components/GradientButton'
+import { Player } from '../../components/Player'
+import { TextDescription } from '../../components/TextDescription'
+import { Head } from '../../components/Head'
 import { Blocks, findDescription, findSourceUrl } from './helpers'
-import { Head } from '../components/Head'
 
 const Relic = ({ data }: any) => {
 
