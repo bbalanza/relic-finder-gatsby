@@ -45,7 +45,7 @@ query GroupQuery {
                   formats: WEBP
                   layout: CONSTRAINED
                   quality: 90
-                  webpOptions: {quality: 90}
+                  webpOptions: {quality: 50}
                   width: 400
                 )
               }
