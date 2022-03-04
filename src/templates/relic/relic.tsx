@@ -24,7 +24,7 @@ const Relic = ({ data, location }: any) => {
     <Head />
     <div className='h-screen flex justify-start flex-col'>
       <Nav className='flex-initial' />
-      <Content className='max-w-4xl flex-initial items-center'>
+      <Content className=' container max-w-4xl flex-initial items-center'>
         <RelicPreview localFile={previewImage}>
           <h2>{title}</h2>
         </RelicPreview>

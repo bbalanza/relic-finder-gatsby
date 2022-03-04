@@ -13,18 +13,18 @@ export default ({ pageContext, location }: { pageContext: any, location: any }) 
         <div className="flex justify-start flex-col">
             <Head />
             <Nav />
-            <Content>
+            <Content className="container">
                 <RelicPreview localFile={group.Image.file}>
                     <h2>{group.Title}</h2>
                 </RelicPreview>
                 <TextDescription markdown={group.Description} />
-            </Content>
             <CardHolder>
                 {group.relics.map((relic: any) => (
                     <Card onClick={()=> navigate(`/${relic.qr_code.Slug}?Group=${group.qr_code.Slug}`) } key={relic.qr_code.Slug} title={relic.Title} localFile={relic.Image.file} className="cursor-pointer"/>
                     )
                 )}
             </CardHolder>
+            </Content>
         </div>
     </>
     )
